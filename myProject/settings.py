@@ -35,10 +35,22 @@ DATABASE_URL = os.getenv('DATABASE_URL', '')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-nw+m8a6&o&xh#!^zma8rfw77%eo78g_ym%)m)jl82j)-6)a&gi'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY') or 'django-insecure-nw+m8a6&o&xh#!^zma8rfw77%eo78g_ym%)m)jl82j)-6)a&gi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'false').lower() == 'true'
+
+# Production hardening — only kicks in when DEBUG is off (i.e. on Railway).
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30  # 30 days; bump after you've validated everything
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = False  # flip to True only when you're ready to submit hstspreload.org
+    SECURE_REFERRER_POLICY = 'same-origin'
+    X_FRAME_OPTIONS = 'DENY'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
