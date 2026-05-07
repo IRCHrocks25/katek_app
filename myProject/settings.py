@@ -43,10 +43,14 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
+    'katek.app',
+    'www.katek.app',
     'katekapp-production.up.railway.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    'https://katek.app',
+    'https://www.katek.app',
     'https://katekapp-production.up.railway.app',
 ]
 
