@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Katalyst Business OS{% endblock %}
+{% block description %}How Industry Rockstar Switzerland GmbH collects, uses, and protects information for Katalyst Business OS tenants and end users.{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-eyebrow">
+        <span class="page-hero-eyebrow-dot"></span>
+        Privacy
+      </div>
+      <h1>Privacy <em>Policy</em></h1>
+      <p class="page-hero-sub">This Privacy Policy explains what information we collect, how we use it, who we share it with, and how tenants and end users can exercise their rights.</p>
+      <p class="page-hero-meta">Last updated: May 7, 2026</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <article class="prose fade-up">
+
+      <p>Industry Rockstar Switzerland GmbH (&ldquo;Industry Rockstar&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;) operates Katalyst Business OS, a multi-tenant software-as-a-service product that automates email triage, social-media publishing, lead intake, and pre and post-call workflows for small businesses (&ldquo;tenants&rdquo;). This policy explains what information we collect, how we use it, who we share it with, and how tenants and end users can exercise their rights.</p>
+
+      <h2>1. Who we are and how to reach us</h2>
+      <p>Controller: Industry Rockstar Switzerland GmbH. Privacy contact: <a href="mailto:support@katek.app">support@katek.app</a>. We respond to verified data-subject requests within 30 days.</p>
+
+      <h2>2. Information we collect</h2>
+
+      <h3>Account and tenant data</h3>
+      <p>The email address, display name, and password hash used to sign in, plus the workspace (&ldquo;tenant&rdquo;) the user belongs to. Multi-tenant isolation is enforced at the database layer through Postgres row-level security policies on every table.</p>
+
+      <h3>OAuth refresh tokens</h3>
+      <p>When a tenant connects Google or Meta, we store the refresh token issued by that provider so we can renew short-lived access tokens. Refresh tokens are stored encrypted at rest and never transmitted to any third party.</p>
+
+      <h3>Email content (Gmail integration only)</h3>
+      <p>When a tenant activates the Email Triage workflow, we read new inbound messages in the connected mailbox in order to classify them and draft suggested replies. Message bodies, subjects, and sender addresses are processed transiently and a redacted excerpt is retained as described in section 6.</p>
+
+      <h3>Social-media account metadata (Meta integration only)</h3>
+      <p>The Facebook Page id, Instagram Business Account id, Page name, and access token for pages the tenant explicitly selects during the Meta OAuth handshake. We do not request or store user friend lists, private profiles, or messages.</p>
+
+      <h3>Tenant-uploaded knowledge</h3>
+      <p>Documents, transcripts, voice profiles, and few-shot examples the tenant uploads to guide the assistant. These are stored in the tenant&rsquo;s row-level isolated partition and embedded as numeric vectors (pgvector) for similarity search. Embeddings are derived data and inherit the same access boundaries and deletion rules as the source content.</p>
+
+      <h3>Operational metadata</h3>
+      <p>Timestamps and status of automated runs (success, error, token usage), used for billing, analytics, and troubleshooting. This metadata does not include message bodies.</p>
+
+      <h2>3. How we use Google user data</h2>
+      <p>The Email Triage workflow requests the following Gmail OAuth scopes:</p>
+      <ul>
+        <li><strong>https://www.googleapis.com/auth/gmail.modify</strong> — used to read new inbound messages and apply organizational labels (e.g. &ldquo;Triaged&rdquo;, &ldquo;Lead&rdquo;, &ldquo;Spam&rdquo;).</li>
+        <li><strong>https://www.googleapis.com/auth/gmail.labels</strong> — used to provision the Katalyst label hierarchy in the user&rsquo;s mailbox during initial setup.</li>
+        <li><strong>https://www.googleapis.com/auth/gmail.compose</strong> — used to create draft replies that the user reviews and sends manually. We do not send email on the user&rsquo;s behalf.</li>
+      </ul>
+      <p>Our use and transfer of information received from Google APIs to any other app will adhere to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.</p>
+      <p>We do not use Google user data to develop, improve, or train generalized or non-personalized artificial-intelligence or machine-learning models. Per-tenant prompt engineering and per-tenant embedding indexes are not considered training of a generalized model and remain isolated to the tenant that supplied the data.</p>
+      <p>We do not allow humans to read Google user data except: (a) with the user&rsquo;s explicit, opt-in consent for a specific operation, (b) when strictly necessary for security investigations or to comply with applicable law, (c) to perform internal operations on aggregated, anonymized data, or (d) when the user has affirmatively published the content. We do not sell Google user data, do not use it for advertising, and do not use it to determine creditworthiness or for lending decisions.</p>
+
+      <h2>4. How we use Meta Platform data</h2>
+      <p>The Social Posts workflow requests the following Meta Graph API permissions: <strong>pages_show_list</strong>, <strong>pages_manage_posts</strong>, <strong>pages_read_engagement</strong>, <strong>instagram_basic</strong>, <strong>instagram_content_publish</strong>, and <strong>business_management</strong>. We use these permissions solely to: (a) list the Pages and Instagram Business Accounts the authenticated user administers so they can pick which one to connect, (b) publish posts the tenant has explicitly approved, and (c) read aggregate engagement metrics (likes, comments, impressions) on the tenant&rsquo;s own posts so the assistant can report performance.</p>
+      <p>This Privacy Policy will not supersede, modify, or be inconsistent with the Meta Platform Terms or Meta Developer Policies. In the event of a conflict, the Meta Platform Terms control with respect to data received from Meta APIs.</p>
+      <p>We do not use Meta Platform data to: discriminate or facilitate discrimination against any person or class; make decisions about eligibility for housing, employment, insurance, education, or credit; surveil people or facilitate surveillance; sell, license, or purchase Platform Data; place Platform Data in a search engine or directory; or use Platform Data to develop generalized AI or ML models that benefit anyone other than the tenant from whose account the data was collected.</p>
+
+      <h2>5. AI processing and training</h2>
+      <p>We use OpenAI APIs as the underlying inference provider for drafting, classification, and embedding. OpenAI is contractually prohibited from training their models on data submitted through their API and we have enabled a Zero Data Retention agreement for traffic that includes Google or Meta user data, meaning OpenAI does not retain that traffic after the response is returned.</p>
+      <p>We do not train, fine-tune, or otherwise build any generalized machine-learning model on tenant content, Google user data, or Meta Platform data. Per-tenant embeddings used for retrieval-augmented generation are stored only in the originating tenant&rsquo;s row-level isolated partition and are deleted when the source content is deleted.</p>
+      <p>AI-generated outputs (suggested replies, social posts, summaries) are presented to the tenant for human review before any external action is taken. The tenant remains responsible for the final content that is sent or published. We disclose AI involvement in its own UI and include a generic AI-assistance notice in published content where the destination platform requires it.</p>
+
+      <h2>6. Data retention</h2>
+      <ul>
+        <li><strong>Email message bodies</strong> retrieved from Gmail are processed transiently. A redacted excerpt of the draft (subject, category, and a 200-character body snippet) is retained for 90 days for audit and quality review and then automatically purged.</li>
+        <li><strong>Social-media post content</strong> (caption, media URL, schedule) is retained for the lifetime of the tenant&rsquo;s account so the tenant can review their own publishing history. Tenants can delete individual posts at any time.</li>
+        <li><strong>Tenant-uploaded knowledge</strong> documents and voice profiles are retained until the tenant deletes them or closes their account.</li>
+        <li><strong>OAuth refresh tokens</strong> are kept while the integration is active and are deleted within 7 days of disconnection or token revocation.</li>
+        <li><strong>Operational metadata</strong> (run timestamps, token-usage counters) is retained for 24 months for billing reconciliation and capacity planning.</li>
+        <li><strong>Daily-summary narratives</strong> are retained indefinitely as part of the tenant&rsquo;s historical record; they contain no message bodies.</li>
+      </ul>
+
+      <h2>7. Subprocessors</h2>
+      <p>We share data only with subprocessors strictly required to operate the service. Each is bound by a data-processing agreement that restricts them to processing on our instructions:</p>
+      <ul>
+        <li><strong>Supabase, Inc.</strong> — managed Postgres database, authentication, object storage, and edge-function runtime. United States.</li>
+        <li><strong>OpenAI, L.L.C.</strong> — large-language-model inference and embedding generation. United States. Zero Data Retention is enabled for Google and Meta user data.</li>
+        <li><strong>Fly.io, Inc.</strong> — hosts the n8n workflow runtime that orchestrates the per-tenant automations. United States.</li>
+        <li><strong>Stripe, Inc.</strong> — billing and subscription management. We do not store full card numbers; Stripe is the card-data processor. United States.</li>
+        <li><strong>Google LLC</strong> — Workspace APIs the tenant has authorized (Gmail). United States.</li>
+        <li><strong>Meta Platforms, Inc.</strong> — Facebook Pages and Instagram Graph APIs the tenant has authorized. United States.</li>
+      </ul>
+      <p>We do not sell personal information. We do not share data with advertisers. We do not use the data for behavioral advertising or for any purpose unrelated to the service the tenant has requested.</p>
+
+      <h2>8. Your rights</h2>
+      <p>Tenants and end users may request access to, correction of, or deletion of personal information we hold about them. To exercise these rights:</p>
+      <ul>
+        <li><strong>Disconnect an integration:</strong> visit <code>/settings/integrations</code> while signed in. Disconnecting revokes the OAuth token and stops further processing immediately.</li>
+        <li><strong>Revoke from the source:</strong> Google users can revoke Katalyst at <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">myaccount.google.com/permissions</a>. Meta users can revoke at <a href="https://www.facebook.com/settings" target="_blank" rel="noopener">facebook.com/settings</a> (Business Integrations).</li>
+        <li><strong>Delete an account:</strong> email <a href="mailto:support@katek.app">support@katek.app</a> from the registered tenant address with the subject &ldquo;Account deletion request&rdquo;. We will delete or anonymize all personal data within 30 days and confirm by email.</li>
+      </ul>
+
+      <h2>9. Data deletion instructions (Meta App Review)</h2>
+      <p>To request deletion of all data associated with your Meta account: (1) sign in and disconnect the Meta integration at <code>/settings/integrations</code>, which immediately stops ingestion and queues stored Page and Instagram metadata for deletion within 7 days, or (2) email <a href="mailto:support@katek.app?subject=Meta%20data%20deletion%20request">support@katek.app</a> with the subject &ldquo;Meta data deletion request&rdquo; and include the Facebook user id or Page id you connected. We will confirm deletion within 30 days.</p>
+
+      <h2>10. Security</h2>
+      <p>Data is encrypted in transit (TLS 1.2+) and at rest. Postgres row-level security policies enforce that one tenant cannot read another tenant&rsquo;s rows even if application code is compromised. OAuth tokens are stored in a column encrypted with a per-project key. Access to production secrets is limited to a named list of engineers and is logged.</p>
+
+      <h2>11. International use and data transfers</h2>
+      <p>We are established in Switzerland and offer the Service to tenants and end users worldwide. Personal data is primarily processed on infrastructure located in the United States (Supabase, OpenAI, Fly.io, Stripe). Where personal data is transferred from the European Economic Area, the United Kingdom, or Switzerland to the United States or other countries, we rely on Standard Contractual Clauses, the UK International Data Transfer Addendum, the Swiss Data Protection Act, or equivalent transfer mechanisms with each subprocessor.</p>
+      <p>Users in the European Economic Area, the United Kingdom, and Switzerland have rights under the EU General Data Protection Regulation, the UK Data Protection Act, and the Swiss Federal Act on Data Protection respectively. Users in California have rights under the California Consumer Privacy Act. Users in other jurisdictions have the rights granted by the mandatory law of their country of residence. To exercise any of these rights, contact us at the address in section 1.</p>
+
+      <h2>12. Children</h2>
+      <p>Katalyst Business OS is a B2B product not directed at children under 13. We do not knowingly collect personal information from children.</p>
+
+      <h2>13. Changes to this policy</h2>
+      <p>We will post any material changes to this policy on this page and update the &ldquo;Last updated&rdquo; date. Continued use of the service after a change constitutes acceptance of the updated policy.</p>
+
+    </article>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <h2>Questions about how we handle data?</h2>
+      <p>Our team is available to clarify any aspect of how Katalyst Business OS stores, protects, or processes information.</p>
+      <div class="cta-band-row">
+        <a href="mailto:support@katek.app" class="btn-cta">
+          Contact Support
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/security" class="btn-cta-ghost">View Security Practices</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

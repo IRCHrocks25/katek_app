@@ -1,0 +1,48 @@
+Welcome to Katek
+================
+
+Hi {{ first_name }},
+
+Thanks for creating a Katek account. Your workspace is ready and you can
+sign in any time.
+
+Open your workspace:
+{{ launchpad_url }}
+
+Signed up with: {{ email }}
+
+
+What's inside your workspace
+----------------------------
+
+- AI KONIK — AI workspace and intelligence environment for human-AI
+  collaboration.
+- Orchestra — Workflow routing, approval chains, and operational
+  coordination.
+- AI Business OS — Operational execution platform for service-based
+  businesses.
+- SOP Master & CourseForge — Internal training, SOP management, and
+  course delivery.
+
+
+Three quick wins
+----------------
+
+1. Sign in and explore your launchpad: {{ launchpad_url }}
+2. Connect Gmail or your CRM under Integrations.
+3. Configure your first AI Business OS workflow.
+
+
+Need help?
+----------
+
+Reply to this email or reach us at {{ support_email }}. We read every
+message.
+
+— The Katek team
+
+---
+You're receiving this because you created a Katek account using {{ email }}.
+Privacy: {{ privacy_url }}
+Terms:   {{ terms_url }}
+© 2026 Industry Rockstar Switzerland GmbH

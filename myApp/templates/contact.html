@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+{% block title %}Contact — Katek{% endblock %}
+{% block description %}Get in touch with the Katek team for platform support, partnerships, or general inquiries.{% endblock %}
+{% block nav_contact %}active{% endblock %}
+
+{% block extra_css %}
+.contact-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  max-width:980px;margin:0 auto 56px;
+}
+.contact-card{
+  background:#fff;border:1px solid var(--gray-100);
+  border-radius:20px;padding:32px;transition:all 0.3s;
+}
+.contact-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--blue-pale);}
+.contact-card .feat-icon{margin-bottom:16px;}
+.contact-card h3{font-size:20px;font-weight:600;color:var(--ink);letter-spacing:-0.02em;margin-bottom:8px;}
+.contact-card p{font-size:14px;color:var(--gray-600);line-height:1.65;margin-bottom:18px;}
+.contact-card a.email{
+  font-size:16px;font-weight:600;color:var(--blue);
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(0,64,255,0.25);padding-bottom:2px;
+  transition:border-color 0.2s;
+}
+.contact-card a.email:hover{border-color:var(--blue);}
+
+.form-section{background:var(--gray-50);}
+.form-wrap{
+  max-width:640px;margin:0 auto;
+  background:#fff;border:1px solid var(--gray-100);
+  border-radius:24px;padding:40px;box-shadow:var(--shadow-sm);
+}
+.form-wrap h2{
+  font-size:26px;font-weight:600;color:var(--ink);
+  letter-spacing:-0.02em;margin-bottom:8px;
+}
+.form-wrap p.lede{font-size:15px;color:var(--gray-600);margin-bottom:28px;}
+.form-row{margin-bottom:18px;}
+.form-row label{
+  display:block;font-size:13px;font-weight:600;color:var(--ink);
+  letter-spacing:-0.01em;margin-bottom:8px;
+}
+.form-row input,
+.form-row textarea,
+.form-row select{
+  width:100%;padding:13px 16px;
+  border:1.5px solid var(--gray-200);border-radius:12px;
+  font-size:15px;color:var(--ink);background:#fff;
+  font-family:inherit;transition:border-color 0.2s, box-shadow 0.2s;
+}
+.form-row input:focus,
+.form-row textarea:focus,
+.form-row select:focus{
+  outline:none;border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(0,64,255,0.08);
+}
+.form-row textarea{resize:vertical;min-height:120px;}
+.form-submit{
+  width:100%;background:var(--blue);color:#fff;
+  border:none;padding:14px 24px;border-radius:100px;
+  font-size:15px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 24px rgba(0,64,255,0.4);
+  transition:all 0.25s;font-family:inherit;
+}
+.form-submit:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 0 36px rgba(0,64,255,0.55);}
+.form-submit:disabled{opacity:0.7;cursor:not-allowed;transform:none;}
+.form-note{
+  font-size:12px;color:var(--gray-500);margin-top:14px;text-align:center;
+}
+.form-success{
+  display:none;background:rgba(0,64,255,0.06);border:1px solid var(--blue-pale);
+  border-radius:14px;padding:18px;margin-bottom:20px;
+  font-size:14px;color:var(--blue-deep);font-weight:500;
+}
+.form-success.show{display:block;}
+@media(max-width:780px){.contact-grid{grid-template-columns:1fr;}}
+{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-eyebrow">
+        <span class="page-hero-eyebrow-dot"></span>
+        Contact
+      </div>
+      <h1>Get in <em>touch</em></h1>
+      <p class="page-hero-sub">Whether you&rsquo;re evaluating Katek for your organization, need platform support, or want to discuss an integration — our team is ready to help.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <div class="contact-card fade-up">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <h3>General Inquiries</h3>
+        <p>Questions about Katek, partnerships, press, or anything that isn&rsquo;t platform-specific support.</p>
+        <a class="email" href="mailto:hello@katek.app">
+          hello@katek.app
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="contact-card fade-up" style="transition-delay:0.08s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <h3>Platform Support</h3>
+        <p>Operational support, technical assistance, account questions, and data-related requests.</p>
+        <a class="email" href="mailto:support@katek.app">
+          support@katek.app
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="content-section form-section">
+  <div class="container">
+    <div class="form-wrap fade-up">
+      <h2>Send us a message</h2>
+      <p class="lede">Fill out the form and our team will follow up by email. For account-specific issues, please use <a href="mailto:support@katek.app" style="color:var(--blue);">support@katek.app</a> directly.</p>
+
+      <div id="form-success" class="form-success">
+        Thanks — your message is ready. Your email client should now open with the details pre-filled. If it doesn&rsquo;t, you can always email us at <strong>hello@katek.app</strong>.
+      </div>
+
+      <form id="contact-form" novalidate>
+        <div class="form-row">
+          <label for="cf-name">Your name</label>
+          <input type="text" id="cf-name" name="name" required autocomplete="name" placeholder="Jane Doe">
+        </div>
+        <div class="form-row">
+          <label for="cf-email">Email address</label>
+          <input type="email" id="cf-email" name="email" required autocomplete="email" placeholder="jane@company.com">
+        </div>
+        <div class="form-row">
+          <label for="cf-topic">Topic</label>
+          <select id="cf-topic" name="topic">
+            <option value="General inquiry">General inquiry</option>
+            <option value="Platform support">Platform support</option>
+            <option value="Partnership / integrations">Partnership / integrations</option>
+            <option value="Press / media">Press / media</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="cf-message">Message</label>
+          <textarea id="cf-message" name="message" required placeholder="Tell us a bit about what you&rsquo;re working on..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">
+          Send message
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="form-note">By submitting, you agree to be contacted by the Katek team about your inquiry.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <h2>Looking for something specific?</h2>
+      <p>Read about how we approach security and data, or jump straight into the platform.</p>
+      <div class="cta-band-row">
+        <a href="/login" class="btn-cta">
+          Access Platform
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/security" class="btn-cta-ghost">Security</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function(){
+  const form = document.getElementById('contact-form');
+  const success = document.getElementById('form-success');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const topic = form.topic.value;
+    const message = form.message.value.trim();
+    if(!name || !email || !message){
+      [form.name, form.email, form.message].forEach(f => {
+        if(!f.value.trim()){ f.style.borderColor = '#e84a4a'; }
+        else { f.style.borderColor = ''; }
+      });
+      return;
+    }
+    const subject = encodeURIComponent('[Katek] ' + topic + ' — ' + name);
+    const body = encodeURIComponent(
+      'Name: ' + name + '\n' +
+      'Email: ' + email + '\n' +
+      'Topic: ' + topic + '\n\n' +
+      'Message:\n' + message
+    );
+    const isSupport = topic === 'Platform support';
+    const target = isSupport ? 'support@katek.app' : 'hello@katek.app';
+    success.classList.add('show');
+    success.scrollIntoView({behavior:'smooth', block:'center'});
+    window.location.href = 'mailto:' + target + '?subject=' + subject + '&body=' + body;
+  });
+})();
+</script>
+{% endblock %}

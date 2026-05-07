@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Katek{% endblock %}</title>
+<meta name="description" content="{% block description %}Katek — operational software platform for AI, workflows, and execution working together.{% endblock %}">
+<style>
+:root {
+  --blue-deep: #001fcc;
+  --blue: #0040FF;
+  --blue-mid: #2255ff;
+  --blue-light: #5577ff;
+  --blue-soft: #8899ff;
+  --blue-pale: #dde5ff;
+  --blue-ghost: #eef2ff;
+  --cyan: #00ccff;
+  --cyan-soft: #66ddff;
+  --cyan-pale: #ccf0ff;
+  --ink: #030d2a;
+  --ink-soft: #0a1840;
+  --gray-800: #1a2340;
+  --gray-700: #2e3a5c;
+  --gray-600: #4a5578;
+  --gray-500: #6b7494;
+  --gray-400: #9ca3bf;
+  --gray-300: #d1d5e8;
+  --gray-200: #e5e8f5;
+  --gray-100: #f0f2fa;
+  --gray-50: #f7f8fc;
+  --white: #FFFFFF;
+  --bg: #f8f9ff;
+  --shadow-sm: 0 2px 8px rgba(0,64,255,0.06);
+  --shadow-md: 0 8px 24px rgba(0,64,255,0.10);
+  --shadow-lg: 0 20px 60px rgba(0,64,255,0.15);
+  --shadow-xl: 0 30px 80px rgba(0,64,255,0.20);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 32px;}
+em,i{font-style:normal!important;}
+a{color:var(--blue);}
+
+/* ═══ NAV ═══ */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:18px 0;
+  background:rgba(3,13,42,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  transition:all 0.3s;
+}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between;}
+.logo{
+  display:flex;align-items:center;text-decoration:none;
+  transition:opacity 0.2s;
+}
+.logo:hover{opacity:0.85;}
+.logo img{height:26px;width:auto;display:block;filter:brightness(0) invert(1);}
+.nav-links{display:flex;gap:4px;list-style:none;}
+.nav-links a{
+  color:rgba(255,255,255,0.6);text-decoration:none;
+  font-size:13px;font-weight:500;padding:7px 14px;
+  border-radius:8px;transition:all 0.2s;
+}
+.nav-links a:hover, .nav-links a.active{color:#fff;background:rgba(255,255,255,0.07);}
+.nav-cta{
+  background:var(--blue);color:#fff;
+  padding:9px 20px;border-radius:100px;
+  font-size:13px;font-weight:600;text-decoration:none;
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:6px;
+  box-shadow:0 0 20px rgba(0,64,255,0.4);
+}
+.nav-cta:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 0 30px rgba(0,64,255,0.6);}
+
+/* ═══ PAGE HERO (smaller than home hero) ═══ */
+.page-hero{
+  position:relative;
+  background:#030d2a;
+  padding:160px 0 80px;
+  overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(0,64,255,0.28),transparent 55%),
+    radial-gradient(ellipse at 70% 80%, rgba(0,204,255,0.16),transparent 55%);
+}
+.page-hero .container{position:relative;z-index:1;}
+.page-hero-inner{max-width:780px;}
+.page-hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.55);
+  text-transform:uppercase;letter-spacing:0.15em;
+  margin-bottom:24px;padding:6px 16px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(8px);
+}
+.page-hero-eyebrow-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);}
+.page-hero h1{
+  font-size:clamp(36px,4.5vw,60px);
+  font-weight:500;line-height:1.05;
+  letter-spacing:-0.03em;color:#fff;
+  margin-bottom:20px;
+}
+.page-hero h1 em{
+  background:linear-gradient(135deg, var(--cyan), var(--blue-soft));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.page-hero-sub{
+  font-size:18px;color:rgba(255,255,255,0.6);
+  line-height:1.6;max-width:680px;
+}
+.page-hero-meta{
+  margin-top:24px;font-size:13px;color:rgba(255,255,255,0.4);
+  letter-spacing:0.04em;
+}
+
+/* ═══ CONTENT SECTIONS ═══ */
+.content-section{
+  background:var(--white);
+  padding:96px 0;
+}
+.content-section.gray{background:var(--gray-50);}
+.content-section.dark{background:var(--ink);color:#fff;}
+.prose{
+  max-width:780px;margin:0 auto;
+  font-size:16px;line-height:1.75;color:var(--gray-700);
+}
+.prose h2{
+  font-size:28px;font-weight:600;color:var(--ink);
+  letter-spacing:-0.02em;line-height:1.2;
+  margin:48px 0 16px;
+}
+.prose h2:first-child{margin-top:0;}
+.prose h3{
+  font-size:18px;font-weight:600;color:var(--ink);
+  letter-spacing:-0.01em;margin:32px 0 12px;
+}
+.prose p{margin-bottom:16px;}
+.prose ul, .prose ol{margin:0 0 16px 24px;}
+.prose li{margin-bottom:8px;}
+.prose strong{color:var(--ink);font-weight:600;}
+.prose a{color:var(--blue);text-decoration:none;border-bottom:1px solid rgba(0,64,255,0.25);transition:border-color 0.2s;}
+.prose a:hover{border-color:var(--blue);}
+.prose code{
+  font-family:'Consolas','Monaco','Courier New',monospace;
+  font-size:0.92em;
+  background:var(--gray-100);
+  border:1px solid var(--gray-200);
+  border-radius:6px;
+  padding:1px 7px;
+  color:var(--ink);
+  word-break:break-all;
+}
+.prose-eyebrow{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:700;
+  color:var(--blue);text-transform:uppercase;letter-spacing:0.12em;
+  margin-bottom:12px;padding:5px 14px;
+  background:rgba(0,64,255,0.1);border:1px solid rgba(0,64,255,0.2);
+  border-radius:100px;
+}
+.prose-meta{
+  font-size:13px;color:var(--gray-500);
+  border-bottom:1px solid var(--gray-200);
+  padding-bottom:24px;margin-bottom:40px;
+}
+
+/* Card grid (used by security/contact pages) */
+.card-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:20px;
+  max-width:1080px;margin:0 auto;
+}
+.feat-card{
+  background:#fff;border-radius:20px;padding:32px;
+  border:1px solid var(--gray-100);
+  display:flex;gap:20px;align-items:flex-start;
+  transition:all 0.3s;
+}
+.feat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--blue-pale);}
+.feat-icon{
+  width:48px;height:48px;border-radius:14px;
+  background:rgba(0,64,255,0.08);
+  color:var(--blue);display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:background 0.3s;
+}
+.feat-card:hover .feat-icon{background:rgba(0,64,255,0.14);}
+.feat-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.feat-text{font-size:14px;color:var(--gray-600);line-height:1.65;}
+
+/* Contact email pill */
+.email-pill{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 24px;
+  background:var(--gray-50);border:1px solid var(--gray-100);
+  border-radius:14px;font-size:16px;font-weight:600;
+  color:var(--blue);text-decoration:none;
+  transition:all 0.25s;
+}
+.email-pill:hover{background:rgba(0,64,255,0.06);border-color:var(--blue-pale);transform:translateY(-2px);}
+
+/* CTA block (dark band) */
+.cta-band{
+  background:var(--ink);
+  position:relative;overflow:hidden;
+  padding:80px 0;
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,64,255,0.3),transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,204,255,0.12),transparent 60%);
+}
+.cta-band-inner{position:relative;z-index:1;text-align:center;max-width:700px;margin:0 auto;}
+.cta-band h2{
+  font-size:clamp(28px,3vw,40px);font-weight:500;
+  letter-spacing:-0.025em;color:#fff;margin-bottom:16px;line-height:1.15;
+}
+.cta-band p{color:rgba(255,255,255,0.6);font-size:17px;line-height:1.6;margin-bottom:28px;}
+.cta-band-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+.btn-cta{
+  background:var(--blue);color:#fff;
+  padding:14px 28px;border-radius:100px;
+  font-size:14px;font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 0 24px rgba(0,64,255,0.5);
+  transition:all 0.25s;
+}
+.btn-cta:hover{background:var(--blue-mid);transform:translateY(-2px);box-shadow:0 0 40px rgba(0,64,255,0.7);}
+.btn-cta-ghost{
+  border:1.5px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.8);
+  padding:13px 24px;border-radius:100px;
+  font-size:14px;font-weight:500;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);
+  transition:all 0.25s;
+}
+.btn-cta-ghost:hover{border-color:rgba(255,255,255,0.45);color:#fff;background:rgba(255,255,255,0.1);}
+
+/* ═══ FOOTER ═══ */
+footer{
+  padding:60px 0 40px;
+  background:var(--ink);
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.footer-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:24px;
+}
+.footer-logo{
+  display:flex;align-items:center;
+}
+.footer-logo img{height:22px;width:auto;display:block;opacity:0.9;filter:brightness(0) invert(1);}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{
+  font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;
+  transition:color 0.2s;
+}
+.footer-links a:hover{color:rgba(255,255,255,0.8);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
+
+/* Fade up */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity 0.7s,transform 0.7s;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* Responsive */
+@media(max-width:968px){
+  .nav-links{display:none;}
+  .content-section{padding:72px 0;}
+  .page-hero{padding:140px 0 64px;}
+  .card-grid{grid-template-columns:1fr;}
+}
+@media(max-width:580px){
+  .container{padding:0 16px;}
+  .cta-band-row{flex-direction:column;align-items:stretch;}
+  .btn-cta,.btn-cta-ghost{justify-content:center;}
+}
+
+{% block extra_css %}{% endblock %}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Katek home">
+      <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1776795634/katek_logo_white_p1evh7.svg" alt="Katek">
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#platform">Platform</a></li>
+      <li><a href="/#how-it-works">How It Works</a></li>
+      <li><a href="/security" class="{% block nav_security %}{% endblock %}">Security</a></li>
+      <li><a href="/contact" class="{% block nav_contact %}{% endblock %}">Contact</a></li>
+    </ul>
+    <a href="/login" class="nav-cta">
+      Access Platform
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1776795634/katek_logo_white_p1evh7.svg" alt="Katek">
+      </div>
+      <nav class="footer-links">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/security">Security</a>
+        <a href="/data-deletion">Data Deletion</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2026 Katek — Operational software infrastructure for modern businesses.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const els = document.querySelectorAll('.fade-up');
+  if(!('IntersectionObserver' in window)){ els.forEach(el=>el.classList.add('visible')); return; }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+  },{ threshold:0.15 });
+  els.forEach(el => io.observe(el));
+})();
+(function(){
+  const nav = document.querySelector('.site-nav');
+  if(!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 60 ? 'rgba(3,13,42,0.95)' : 'rgba(3,13,42,0.85)';
+  }, { passive:true });
+})();
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

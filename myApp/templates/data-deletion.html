@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Data Deletion — Katek{% endblock %}
+{% block description %}How to request deletion of your Katek account and associated operational data.{% endblock %}
+
+{% block extra_css %}
+.steps-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  max-width:1080px;margin:48px auto 0;
+}
+.step-card{
+  background:#fff;border:1px solid var(--gray-100);
+  border-radius:20px;padding:28px;
+  position:relative;transition:all 0.3s;
+}
+.step-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--blue-pale);}
+.step-num{
+  font-size:11px;font-weight:700;letter-spacing:0.15em;
+  text-transform:uppercase;color:var(--blue);margin-bottom:10px;
+}
+.step-title{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-0.01em;}
+.step-text{font-size:14px;color:var(--gray-600);line-height:1.65;}
+.email-template{
+  background:var(--gray-50);border:1px solid var(--gray-200);
+  border-radius:14px;padding:24px;margin-top:16px;
+  font-family:'Consolas','Monaco',monospace;font-size:13px;
+  color:var(--gray-700);line-height:1.7;white-space:pre-wrap;
+}
+@media(max-width:968px){.steps-grid{grid-template-columns:1fr;}}
+{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-eyebrow">
+        <span class="page-hero-eyebrow-dot"></span>
+        Data Deletion
+      </div>
+      <h1>Request <em>data deletion</em></h1>
+      <p class="page-hero-sub">You can request deletion of your account and associated operational data at any time. Below is how the process works and how to contact us.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+
+    <div class="prose fade-up">
+      <h2>Overview</h2>
+      <p>Katek respects your right to control your data. If you would like your account and the operational data associated with it removed from our platform, you can request deletion by emailing our team. Requests are reviewed and processed in line with platform policies, applicable law, and any operational requirements that apply to your account.</p>
+    </div>
+
+    <div class="steps-grid fade-up">
+      <div class="step-card">
+        <div class="step-num">Step 01</div>
+        <h3 class="step-title">Send a request</h3>
+        <p class="step-text">Email <a href="mailto:support@katek.app" style="color:var(--blue);font-weight:600;">support@katek.app</a> from the email address associated with your Katek account.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">Step 02</div>
+        <h3 class="step-title">Verification</h3>
+        <p class="step-text">We&rsquo;ll verify the request to ensure it&rsquo;s coming from the rightful account holder and confirm what should be deleted.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">Step 03</div>
+        <h3 class="step-title">Processing</h3>
+        <p class="step-text">Once verified, we&rsquo;ll process the deletion in line with platform policies and confirm completion via email.</p>
+      </div>
+    </div>
+
+    <div class="prose fade-up" style="margin-top:80px;">
+
+      <h2>What gets deleted</h2>
+      <ul>
+        <li>Your Katek account and authentication information</li>
+        <li>Profile information you submitted to the platform</li>
+        <li>Operational data associated with your account, such as workflows, configurations, and stored content</li>
+        <li>Session tokens and identifiers tied to your account</li>
+      </ul>
+
+      <h2>What we may retain</h2>
+      <p>We may retain limited information when required by law, for security and fraud prevention, or to enforce our agreements. Where possible, retained data is minimized and access is restricted.</p>
+
+      <h2>Suggested email template</h2>
+      <p>To make your request faster to process, you can use the template below.</p>
+      <div class="email-template">To: support@katek.app
+Subject: Data Deletion Request
+
+Hello Katek team,
+
+I&rsquo;m writing to request deletion of my account and associated operational data.
+
+Account email: [your email here]
+Organization (if applicable): [your organization]
+
+Please confirm once the deletion has been processed.
+
+Thank you,
+[Your name]</div>
+
+      <h2>Processing time</h2>
+      <p>We aim to process verified deletion requests within a reasonable timeframe, in line with platform policies and operational requirements. We&rsquo;ll let you know if we need any additional information or if your request will take longer to complete.</p>
+
+      <h2>Questions</h2>
+      <p>If you have questions about this process — including what data we hold or how deletion is performed — contact us at <a href="mailto:support@katek.app">support@katek.app</a> or visit our <a href="/privacy">Privacy Policy</a>.</p>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <h2>Ready to request deletion?</h2>
+      <p>Send an email and our team will guide you through the process from there.</p>
+      <div class="cta-band-row">
+        <a href="mailto:support@katek.app?subject=Data%20Deletion%20Request" class="btn-cta">
+          Email support@katek.app
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/privacy" class="btn-cta-ghost">View Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

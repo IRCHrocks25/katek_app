@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block title %}Security — Katek{% endblock %}
+{% block description %}How Katek secures authentication, infrastructure, access control, and operational data.{% endblock %}
+{% block nav_security %}active{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-inner">
+      <div class="page-hero-eyebrow">
+        <span class="page-hero-eyebrow-dot"></span>
+        Security
+      </div>
+      <h1>Built with operational <em>security in mind.</em></h1>
+      <p class="page-hero-sub">Every layer of the Katek platform is designed with the security and reliability requirements that operational businesses depend on — from authentication and access control to infrastructure and data protection.</p>
+    </div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="container">
+
+    <div class="card-grid">
+
+      <div class="feat-card fade-up">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Secure Authentication</h4>
+          <p class="feat-text">Centralized authentication with encrypted sessions, secure session token handling, and support for trusted identity providers. Sign-in is protected with modern cryptographic standards.</p>
+          <ul style="margin-top:12px;font-size:13px;color:var(--gray-600);line-height:1.7;padding-left:18px;">
+            <li>Encrypted user sessions</li>
+            <li>Provider-backed sign-in (e.g., Google)</li>
+            <li>Session expiration and revocation controls</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-card fade-up" style="transition-delay:0.05s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Infrastructure</h4>
+          <p class="feat-text">The platform runs on secure, professionally managed hosting with protected environments, network controls, and continuous monitoring designed for operational workloads.</p>
+          <ul style="margin-top:12px;font-size:13px;color:var(--gray-600);line-height:1.7;padding-left:18px;">
+            <li>Secure hosting providers</li>
+            <li>Protected environments and network isolation</li>
+            <li>Operational monitoring and uptime visibility</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-card fade-up" style="transition-delay:0.1s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Access Control</h4>
+          <p class="feat-text">Role-based permissions and controlled access let organizations manage exactly who can see, edit, or take action across each system in the Katek ecosystem.</p>
+          <ul style="margin-top:12px;font-size:13px;color:var(--gray-600);line-height:1.7;padding-left:18px;">
+            <li>Role-based permissions (RBAC)</li>
+            <li>Workspace and resource-level scoping</li>
+            <li>Controlled access for invited users</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-card fade-up" style="transition-delay:0.15s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.54 0 4.84 1.05 6.49 2.74"/><polyline points="21 4 21 10 15 10"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Data Protection</h4>
+          <p class="feat-text">Operational data is handled using encrypted communication and protected storage. We follow practices designed to safeguard data in transit and at rest.</p>
+          <ul style="margin-top:12px;font-size:13px;color:var(--gray-600);line-height:1.7;padding-left:18px;">
+            <li>Encrypted communication (HTTPS/TLS)</li>
+            <li>Protected storage environments</li>
+            <li>Data deletion workflows on request</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-card fade-up" style="transition-delay:0.2s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Operational Reliability</h4>
+          <p class="feat-text">Built to support scalable operational environments, integrations, and connected workflows. Reliability and uptime engineered for business-critical systems.</p>
+          <ul style="margin-top:12px;font-size:13px;color:var(--gray-600);line-height:1.7;padding-left:18px;">
+            <li>Continuous platform monitoring</li>
+            <li>Operational alerting and incident response</li>
+            <li>Disaster-aware infrastructure design</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-card fade-up" style="transition-delay:0.25s;">
+        <div class="feat-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div>
+          <h4 class="feat-title">Responsible Disclosure</h4>
+          <p class="feat-text">If you believe you&rsquo;ve discovered a vulnerability, please contact us privately so we can investigate and address it before any public discussion.</p>
+          <p style="margin-top:14px;font-size:13px;color:var(--gray-600);">Report to <a href="mailto:support@katek.app" style="color:var(--blue);font-weight:600;">support@katek.app</a></p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="prose fade-up" style="margin-top:80px;">
+      <h2>Our security approach</h2>
+      <p>Security at Katek is treated as an operational discipline rather than a checklist. Authentication, access control, infrastructure, and data handling are designed together so that protecting an organization&rsquo;s data is a default outcome of using the platform — not a separate workstream.</p>
+      <p>We continue to invest in stronger controls, deeper observability, and clearer documentation as the platform grows. If your organization has specific security or compliance requirements, we&rsquo;re happy to walk through how Katek can fit your environment.</p>
+
+      <h2>Reporting a security concern</h2>
+      <p>To report a vulnerability, security incident, or any concern related to platform integrity, contact <a href="mailto:support@katek.app">support@katek.app</a>. Please include enough detail for us to reproduce or verify the issue, and avoid public disclosure until we have had a chance to investigate.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <h2>Have a security question?</h2>
+      <p>Reach out for a deeper conversation about authentication, access controls, or how Katek fits into your security environment.</p>
+      <div class="cta-band-row">
+        <a href="mailto:support@katek.app" class="btn-cta">
+          Contact Support
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="/privacy" class="btn-cta-ghost">View Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create account — Katek</title>
+<meta name="description" content="Create your Katek workspace. Secure email signup for the operational software platform.">
+<style>
+:root {
+  --blue: #0040FF;
+  --blue-mid: #2255ff;
+  --blue-soft: #8899ff;
+  --cyan: #00ccff;
+  --ink: #030d2a;
+  --white: #FFFFFF;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--ink);
+  color:#fff;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  position:relative;overflow-x:hidden;
+}
+em,i{font-style:normal!important;}
+
+.bg-fx{
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(0,64,255,0.35),transparent 55%),
+    radial-gradient(ellipse at 25% 75%, rgba(0,204,255,0.18),transparent 55%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,64,255,0.12),transparent 60%);
+}
+.bg-grid{
+  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.25;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size:48px 48px;
+  mask-image:radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse at center, #000 30%, transparent 75%);
+}
+
+.top-bar{
+  position:relative;z-index:2;
+  padding:24px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{display:inline-flex;align-items:center;text-decoration:none;transition:opacity 0.2s;}
+.logo:hover{opacity:0.85;}
+.logo img{height:24px;width:auto;display:block;filter:brightness(0) invert(1);}
+.back-link{
+  font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;transition:color 0.2s;
+}
+.back-link:hover{color:#fff;}
+
+.signup-wrap{
+  flex:1;display:flex;align-items:center;justify-content:center;
+  padding:32px 24px;position:relative;z-index:1;
+}
+
+.signup-card{
+  width:100%;max-width:460px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:24px;
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  padding:40px 36px;
+  box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+.signup-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.55);
+  text-transform:uppercase;letter-spacing:0.15em;
+  margin-bottom:16px;padding:5px 14px;
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;background:rgba(255,255,255,0.05);
+}
+.signup-eyebrow-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 8px var(--cyan);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{box-shadow:0 0 8px var(--cyan);}50%{box-shadow:0 0 18px var(--cyan);}}
+.signup-card h1{
+  font-size:28px;font-weight:500;letter-spacing:-0.025em;
+  line-height:1.15;color:#fff;margin-bottom:8px;
+}
+.signup-card h1 em{
+  background:linear-gradient(135deg, var(--cyan), var(--blue-soft));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.signup-card .lede{
+  font-size:14px;color:rgba(255,255,255,0.55);
+  line-height:1.6;margin-bottom:22px;
+}
+
+.error-msg{
+  background:rgba(232,74,74,0.1);
+  border:1px solid rgba(232,74,74,0.32);
+  border-radius:10px;padding:11px 14px;margin-bottom:14px;
+  font-size:13px;color:#ff9a9a;line-height:1.5;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.error-msg svg{flex-shrink:0;margin-top:1px;}
+
+.email-form .form-row{margin-bottom:14px;}
+.email-form label{
+  display:block;font-size:12px;font-weight:600;
+  color:rgba(255,255,255,0.7);letter-spacing:0.02em;
+  margin-bottom:7px;
+}
+.email-form input{
+  width:100%;padding:12px 16px;
+  background:rgba(255,255,255,0.06);
+  border:1.5px solid rgba(255,255,255,0.12);
+  border-radius:10px;color:#fff;font-size:14px;
+  font-family:inherit;transition:border-color 0.2s, box-shadow 0.2s;
+}
+.email-form input::placeholder{color:rgba(255,255,255,0.35);}
+.email-form input:focus{
+  outline:none;border-color:var(--blue-soft);
+  box-shadow:0 0 0 4px rgba(136,153,255,0.12);
+}
+.hint{
+  font-size:11px;color:rgba(255,255,255,0.4);
+  margin-top:6px;letter-spacing:0.02em;
+}
+.email-form .submit-btn{
+  width:100%;background:var(--blue);color:#fff;
+  border:none;padding:13px 18px;border-radius:12px;
+  font-size:15px;font-weight:600;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 0 24px rgba(0,64,255,0.5);
+  transition:all 0.25s;font-family:inherit;
+  margin-top:6px;
+}
+.email-form .submit-btn:hover{background:var(--blue-mid);transform:translateY(-1px);box-shadow:0 0 36px rgba(0,64,255,0.7);}
+
+.terms-note{
+  font-size:11px;color:rgba(255,255,255,0.4);
+  margin-top:14px;text-align:center;line-height:1.55;
+}
+.terms-note a{color:var(--blue-soft);text-decoration:none;}
+.terms-note a:hover{color:#fff;}
+
+.signin-line{
+  margin-top:20px;text-align:center;
+  font-size:13px;color:rgba(255,255,255,0.5);
+}
+.signin-line a{color:var(--blue-soft);text-decoration:none;font-weight:600;}
+.signin-line a:hover{color:#fff;}
+
+.signup-foot{
+  margin-top:24px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,0.08);
+  font-size:11px;color:rgba(255,255,255,0.32);
+  text-align:center;letter-spacing:0.04em;
+}
+
+.page-bottom{
+  position:relative;z-index:1;
+  padding:20px 32px 28px;
+  text-align:center;font-size:12px;
+  color:rgba(255,255,255,0.3);letter-spacing:0.04em;
+}
+.page-bottom a{color:rgba(255,255,255,0.5);text-decoration:none;margin:0 8px;}
+.page-bottom a:hover{color:#fff;}
+
+@media(max-width:520px){
+  .signup-card{padding:30px 22px;}
+  .signup-card h1{font-size:24px;}
+  .top-bar{padding:18px 20px;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx"></div>
+<div class="bg-grid"></div>
+
+<header class="top-bar">
+  <a href="/" class="logo" aria-label="Katek home">
+    <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1776795634/katek_logo_white_p1evh7.svg" alt="Katek">
+  </a>
+  <a href="/" class="back-link">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to home
+  </a>
+</header>
+
+<main class="signup-wrap">
+  <div class="signup-card">
+
+    <span class="signup-eyebrow">
+      <span class="signup-eyebrow-dot"></span>
+      New Account
+    </span>
+
+    <h1>Create your <em>workspace</em></h1>
+    <p class="lede">A few details and you&rsquo;re in. Google sign-in is coming soon — for now, use email to get started.</p>
+
+    {% if error %}
+    <div class="error-msg">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>{{ error }}</span>
+    </div>
+    {% endif %}
+
+    <form class="email-form" method="post" action="/signup" novalidate>
+      {% csrf_token %}
+      <div class="form-row">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" required autocomplete="name" placeholder="Jane Doe" value="{{ name|default:'' }}">
+      </div>
+      <div class="form-row">
+        <label for="email">Email address</label>
+        <input type="email" id="email" name="email" required autocomplete="email" placeholder="you@company.com" value="{{ email|default:'' }}">
+      </div>
+      <div class="form-row">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required autocomplete="new-password" placeholder="At least 8 characters" minlength="8">
+        <p class="hint">Use 8 or more characters with a mix of letters, numbers, and symbols.</p>
+      </div>
+      <div class="form-row">
+        <label for="confirm">Confirm password</label>
+        <input type="password" id="confirm" name="confirm" required autocomplete="new-password" placeholder="Re-enter your password" minlength="8">
+      </div>
+      <button type="submit" class="submit-btn">
+        Create account
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </button>
+      <p class="terms-note">By creating an account you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</p>
+    </form>
+
+    <p class="signin-line">Already have an account? <a href="/login">Sign in</a></p>
+
+    <div class="signup-foot">
+      Secure Authentication &nbsp;·&nbsp; Encrypted Sessions &nbsp;·&nbsp; Role-Based Access
+    </div>
+
+  </div>
+</main>
+
+<footer class="page-bottom">
+  © 2026 Katek &nbsp;·&nbsp;
+  <a href="/privacy">Privacy</a>
+  <a href="/terms">Terms</a>
+  <a href="/security">Security</a>
+  <a href="/contact">Contact</a>
+</footer>
+
+</body>
+</html>

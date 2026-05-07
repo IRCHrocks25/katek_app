@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Katek — Operational Software Platform</title>
+<meta name="description" content="Katek is a unified operational software platform for AI-assisted workflows, business coordination, training systems, and knowledge management.">
+
+<style>
+:root{
+  --purple-deep:#001fcc;
+  --purple-700:#0033e6;
+  --purple-600:#0040FF;
+  --purple-500:#2255ff;
+  --purple-400:#5577ff;
+  --purple-300:#8899ff;
+  --purple-200:#bbccff;
+  --purple-100:#dde5ff;
+  --purple-50:#eef2ff;
+  --cyan-500:#0099ee;
+  --cyan-400:#00ccff;
+  --cyan-300:#66ddff;
+  --cyan-100:#ccf0ff;
+  --teal-400:#00aadd;
+  --teal-100:#cceeff;
+  --ink:#030d2a;
+  --ink-soft:#0a1840;
+  --gray-800:#1a2340;
+  --gray-700:#2e3a5c;
+  --gray-600:#4a5578;
+  --gray-500:#6b7494;
+  --gray-400:#9ca3bf;
+  --gray-300:#d1d5e8;
+  --gray-200:#e5e8f5;
+  --gray-100:#f0f2fa;
+  --gray-50:#f7f8fc;
+  --white:#FFFFFF;
+  --bg:#f8f9ff;
+  --shadow-sm:0 2px 8px rgba(0,64,255,0.06);
+  --shadow-md:0 8px 24px rgba(0,64,255,0.10);
+  --shadow-lg:0 20px 60px rgba(0,64,255,0.15);
+  --shadow-xl:0 30px 80px rgba(0,64,255,0.20);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+em,i,h1,h2,h3,h4{font-style:normal!important;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);
+  line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+.container{max-width:1280px;margin:0 auto;padding:0 32px;}
+
+/* ═══ NAV ═══ */
+nav.site-nav{
+  position:absolute;top:0;left:0;right:0;z-index:100;
+  background:transparent;border-bottom:none;
+}
+.nav-inner{
+  max-width:1280px;margin:0 auto;
+  padding:24px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo-wrap{display:flex;align-items:center;text-decoration:none;gap:10px;}
+.logo-wordmark{
+  font-size:20px;font-weight:700;color:#fff;
+  letter-spacing:-0.02em;display:flex;align-items:center;gap:6px;
+}
+.logo-wordmark span{
+  font-size:10px;font-weight:600;
+  color:rgba(255,255,255,0.4);
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:2px 8px;border:1px solid rgba(255,255,255,0.15);
+  border-radius:100px;margin-left:4px;
+}
+.nav-links{display:flex;gap:0;list-style:none;}
+.nav-links a{
+  color:rgba(255,255,255,0.65);text-decoration:none;
+  font-size:13px;font-weight:500;
+  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 14px;letter-spacing:0.01em;transition:color 0.2s;
+}
+.nav-links a:hover{color:#fff;}
+.nav-cta{
+  background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.85);
+  padding:8px 18px;border-radius:100px;
+  font-size:13px;font-weight:600;text-decoration:none;
+  transition:all 0.25s;display:inline-flex;align-items:center;gap:6px;
+  border:1.5px solid rgba(255,255,255,0.25);backdrop-filter:blur(8px);
+  letter-spacing:-0.01em;
+}
+.nav-cta:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.5);color:#fff;transform:translateY(-1px);}
+
+/* ═══ BUTTONS ═══ */
+@property --btn-angle{syntax:'<angle>';initial-value:0deg;inherits:false;}
+@keyframes btn-border-spin{to{--btn-angle:360deg;}}
+
+.btn-primary{
+  background:#fff;color:#030d2a;
+  padding:14px 28px;border-radius:100px;
+  font-size:15px;font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:8px;
+  border:none;cursor:pointer;font-family:inherit;
+  letter-spacing:-0.01em;position:relative;isolation:isolate;
+  transition:transform 0.2s,box-shadow 0.3s;z-index:0;
+  box-shadow:0 4px 20px rgba(255,255,255,0.18);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,255,255,0.28);}
+.btn-primary svg{transition:transform 0.25s;}
+.btn-primary:hover svg{transform:translateX(4px);}
+
+.btn-ghost{
+  color:#fff;padding:14px 20px;
+  font-size:15px;font-weight:600;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+  border-radius:100px;border:1.5px solid rgba(255,255,255,0.3);
+  background:rgba(255,255,255,0.08);transition:all 0.2s;letter-spacing:-0.01em;
+}
+.btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,0.15);color:#fff;}
+
+/* ═══ TYPOGRAPHY ═══ */
+.eyebrow{
+  display:inline-flex;align-items:center;
+  font-size:11px;font-weight:700;color:#0040FF;
+  text-transform:uppercase;letter-spacing:0.12em;
+  margin-bottom:16px;padding:5px 14px;
+  background:rgba(0,64,255,0.1);border:1px solid rgba(0,64,255,0.2);border-radius:100px;
+}
+h1,h2,h3,h4{font-family:'Segoe UI',system-ui,sans-serif;letter-spacing:-0.03em;color:var(--ink);}
+h1.page-title{
+  font-size:clamp(44px,5.5vw,76px);font-weight:500;
+  line-height:1.02;letter-spacing:-0.035em;margin-bottom:28px;text-align:center;
+}
+h2.section-title{font-size:clamp(36px,4vw,52px);font-weight:500;line-height:1.08;margin-bottom:20px;}
+.section-sub{font-size:19px;color:var(--gray-700);line-height:1.55;}
+.section-header{max-width:720px;margin:0 auto 64px;text-align:center;}
+
+/* ═══ HERO ═══ */
+.hero{position:relative;padding:200px 0 160px;min-height:100vh;overflow:hidden;}
+.hero .container{position:relative;z-index:2;}
+.hero-grid{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  max-width:860px;margin:0 auto;
+}
+.hero #heroTitle{color:#fff!important;-webkit-text-fill-color:#fff!important;}
+.hero-sub{
+  font-size:19px;color:rgba(255,255,255,0.72);
+  line-height:1.55;max-width:640px;margin:0 auto 36px;text-align:center;
+}
+.hero-cta-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:48px;justify-content:center;}
+
+/* Trust strip */
+.trust-strip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  padding-top:48px;width:100%;
+  border-top:1px solid rgba(255,255,255,0.15);
+}
+.trust-item{
+  display:flex;flex-direction:column;gap:6px;
+  padding:0 32px;border-right:1px solid rgba(255,255,255,0.12);
+  text-align:center;align-items:center;
+}
+.trust-item:last-child{border-right:none;}
+.trust-label{font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.12em;font-weight:600;}
+.trust-val{
+  font-size:13px;font-weight:600;
+  color:rgba(255,255,255,0.55);
+  letter-spacing:0.02em;margin-top:2px;
+}
+
+/* ═══ SECTIONS ═══ */
+section{padding:120px 0;}
+.tinted-section{background:#fafaf7;}
+.dark-section{background:var(--ink);color:#fff;position:relative;overflow:hidden;}
+.dark-section h2{color:#fff;}
+.dark-section .section-sub{color:rgba(255,255,255,0.7);}
+
+/* ═══ BENTO ═══ */
+.bento-grid{display:grid;grid-template-columns:400px 1fr;gap:16px;align-items:stretch;}
+.bento-col{display:flex;flex-direction:column;gap:16px;}
+.bento-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;}
+.bento-card{
+  border-radius:20px;padding:32px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:12px;
+  justify-content:flex-end;min-height:260px;
+  transition:transform 0.22s,box-shadow 0.22s;
+}
+.bento-card:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,0.10);}
+.bento-tall{height:100%;min-height:360px;}
+.bento-title{font-size:22px;font-weight:600;line-height:1.2;letter-spacing:-0.02em;color:var(--ink);margin:0;}
+.bento-text{font-size:17px;line-height:1.6;color:var(--gray-500);margin:0;}
+.bento-body{display:flex;flex-direction:column;gap:10px;}
+.bento-wide{min-height:200px;position:relative;}
+@media(max-width:768px){
+  .bento-grid{grid-template-columns:1fr;}
+  .bento-row{grid-template-columns:1fr;}
+}
+
+/* ═══ SHIFT / WHAT WE ACTUALLY DO ═══ */
+.shift{position:relative;overflow:hidden;}
+.shift-bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 30%,rgba(0,64,255,0.12),transparent 50%),
+    radial-gradient(ellipse at 80% 70%,rgba(0,226,224,0.1),transparent 50%);
+}
+.shift-inner{max-width:900px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.shift-body{font-size:19px;color:var(--gray-700);line-height:1.6;margin-bottom:48px;}
+
+/* ═══ PRODUCTS ═══ */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.product-card{
+  background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);border-radius:28px;
+  padding:40px 40px 0;border:1.5px solid rgba(255,255,255,0.1);
+  transition:transform 0.4s,box-shadow 0.4s;
+  position:relative;overflow:hidden;cursor:pointer;
+  text-decoration:none;color:inherit;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  min-height:520px;isolation:isolate;
+}
+.product-card::before{
+  content:'';position:absolute;inset:-2px;border-radius:30px;
+  opacity:0;transition:opacity 0.4s;z-index:-1;pointer-events:none;
+}
+.product-card.p1::before{background:conic-gradient(from var(--btn-angle),#0040FF,#00ccff,#60aaff,#0040FF);animation:btn-border-spin 3s linear infinite paused;}
+.product-card.p2::before{background:conic-gradient(from var(--btn-angle),#DE77A5,#FF6D18,#FAAC63,#DE77A5);animation:btn-border-spin 3s linear infinite paused;}
+.product-card.p3::before{background:conic-gradient(from var(--btn-angle),#0040FF,#c77dff,#60aaff,#0040FF);animation:btn-border-spin 3s linear infinite paused;}
+.product-card.p4::before{background:conic-gradient(from var(--btn-angle),#8400FF,#FF6D18,#c77dff,#8400FF);animation:btn-border-spin 3s linear infinite paused;}
+.product-card.p5::before{background:conic-gradient(from var(--btn-angle),#00aadd,#0040FF,#00ccff,#00aadd);animation:btn-border-spin 3s linear infinite paused;}
+.product-card.p6::before{background:conic-gradient(from var(--btn-angle),#5577ff,#00ccff,#8899ff,#5577ff);animation:btn-border-spin 3s linear infinite paused;}
+.product-card::after{
+  content:'';position:absolute;inset:1.5px;border-radius:27px;
+  background:rgba(4,9,26,0.92);backdrop-filter:blur(12px);
+  z-index:-1;pointer-events:none;
+}
+.product-card:hover{transform:translateY(-6px);border-color:transparent;}
+.product-card:hover::before{opacity:1;animation-play-state:running;}
+.product-card .card-glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(60px);transition:opacity 0.4s;}
+.product-card .card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(4,9,26,0.5) 0%,rgba(4,9,26,0.3) 50%,rgba(4,9,26,0) 100%);
+  border-radius:28px;pointer-events:none;z-index:0;
+}
+.product-card>*{position:relative;z-index:1;}
+.product-card>.card-overlay{z-index:0;}
+/* Glows */
+.product-card.p1 .card-glow-1{width:280px;height:280px;top:-60px;right:-60px;background:radial-gradient(circle,rgba(0,150,255,0.45),transparent 70%);}
+.product-card.p1 .card-glow-2{width:180px;height:180px;bottom:-50px;left:-30px;background:radial-gradient(circle,rgba(0,200,255,0.25),transparent 70%);}
+.product-card.p2 .card-glow-1{width:300px;height:300px;top:-80px;left:-60px;background:radial-gradient(circle,rgba(222,119,165,0.5),transparent 70%);}
+.product-card.p2 .card-glow-2{width:220px;height:220px;bottom:-60px;right:-40px;background:radial-gradient(circle,rgba(255,109,24,0.35),transparent 70%);}
+.product-card.p3 .card-glow-1{width:300px;height:300px;bottom:-80px;left:-60px;background:radial-gradient(circle,rgba(100,160,255,0.4),transparent 70%);}
+.product-card.p3 .card-glow-2{width:180px;height:180px;top:-40px;right:-20px;background:radial-gradient(circle,rgba(199,125,255,0.3),transparent 70%);}
+.product-card.p4 .card-glow-1{width:280px;height:280px;top:-60px;right:-40px;background:radial-gradient(circle,rgba(132,0,255,0.45),transparent 70%);}
+.product-card.p4 .card-glow-2{width:220px;height:220px;bottom:-60px;left:-40px;background:radial-gradient(circle,rgba(255,109,24,0.35),transparent 70%);}
+.product-card.p5 .card-glow-1{width:260px;height:260px;top:-60px;left:-40px;background:radial-gradient(circle,rgba(0,170,221,0.45),transparent 70%);}
+.product-card.p5 .card-glow-2{width:180px;height:180px;bottom:-40px;right:-30px;background:radial-gradient(circle,rgba(0,64,255,0.3),transparent 70%);}
+.product-card.p6 .card-glow-1{width:260px;height:260px;bottom:-60px;right:-40px;background:radial-gradient(circle,rgba(85,119,255,0.4),transparent 70%);}
+.product-card.p6 .card-glow-2{width:180px;height:180px;top:-40px;left:-30px;background:radial-gradient(circle,rgba(0,204,255,0.25),transparent 70%);}
+/* Hover shadows */
+.product-card.p1:hover{box-shadow:0 24px 64px rgba(0,100,255,0.3);}
+.product-card.p2:hover{box-shadow:0 24px 64px rgba(222,119,165,0.3);}
+.product-card.p3:hover{box-shadow:0 24px 64px rgba(0,64,255,0.3);}
+.product-card.p4:hover{box-shadow:0 24px 64px rgba(132,0,255,0.3);}
+.product-card.p5:hover{box-shadow:0 24px 64px rgba(0,170,221,0.3);}
+.product-card.p6:hover{box-shadow:0 24px 64px rgba(85,119,255,0.3);}
+.pill-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:20px;}
+.tag-1{color:#00ccff;}
+.tag-2{color:#DE77A5;}
+.tag-3{color:#c77dff;}
+.tag-4{color:#FF9A5C;}
+.tag-5{color:#00aadd;}
+.tag-6{color:#8899ff;}
+.product-title{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:32px;font-weight:500;letter-spacing:-0.025em;line-height:1.1;
+  margin-bottom:14px;color:#fff;
+}
+.product-pitch{font-size:16px;color:rgba(255,255,255,0.7);line-height:1.55;margin-bottom:24px;}
+.product-meta{
+  display:flex;flex-direction:column;gap:8px;
+  padding:18px 0;border-top:1px solid rgba(255,255,255,0.08);margin-bottom:14px;
+}
+.meta-row{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:rgba(255,255,255,0.65);}
+.meta-label{font-weight:600;color:rgba(255,255,255,0.85);min-width:80px;flex-shrink:0;}
+.product-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:#030d2a;
+  padding:10px 20px;border:none;border-radius:100px;
+  background:#fff;transition:transform 0.25s,box-shadow 0.25s;
+  align-self:flex-start;position:relative;isolation:isolate;z-index:2;margin-bottom:8px;
+}
+.product-cta::before{
+  content:'';position:absolute;inset:-1.5px;border-radius:100px;
+  background:conic-gradient(from var(--btn-angle),#0040FF,#c77dff,#FF6D18,#FAAC63,#0040FF);
+  opacity:0;transition:opacity 0.3s;z-index:-2;pointer-events:none;
+  animation:btn-border-spin 2s linear infinite paused;
+}
+.product-cta::after{content:'';position:absolute;inset:1.5px;border-radius:100px;background:#fff;z-index:-1;pointer-events:none;}
+.product-card:hover .product-cta{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,64,255,0.15);}
+.product-card:hover .product-cta::before{opacity:1;animation-play-state:running;}
+.product-card:hover .product-cta svg{transform:translateX(4px);}
+.product-cta svg{transition:transform 0.3s;position:relative;z-index:2;}
+
+/* 6-card layout: 2 col, last card full width */
+.products-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.product-card.full-width{grid-column:1/-1;flex-direction:row;min-height:260px;padding:40px;}
+.product-card.full-width .product-title{font-size:26px;margin-bottom:10px;}
+.product-card.full-width .product-pitch{font-size:15px;margin-bottom:0;}
+.product-card.full-width .product-meta{flex-direction:row;flex-wrap:wrap;gap:16px;border-top:none;padding-top:0;}
+.product-card.full-width .meta-row{min-width:200px;}
+.full-width-left{flex:1;}
+.full-width-cta{display:flex;align-items:flex-end;flex-shrink:0;padding-left:32px;}
+
+/* ═══ STICKY CARDS ═══ */
+.katek-diff-section{position:relative;padding-bottom:0;background:#fff;}
+.kd-header-wrap{text-align:center;padding:100px 32px 60px;background:#fff;position:relative;z-index:1;}
+.kd-cards-wrap{position:relative;max-width:1280px;margin:0 auto;padding:40px 32px 180px;background:#fff;}
+.kd-card{
+  position:sticky;border-radius:24px;overflow:hidden;
+  margin-bottom:24px;transform-origin:center top;will-change:transform,box-shadow;
+}
+.kd-card[data-index="0"]{top:0;z-index:1;}
+.kd-card[data-index="1"]{top:0;z-index:2;}
+.kd-card[data-index="2"]{top:0;z-index:3;}
+.kd-card[data-index="3"]{top:0;z-index:4;}
+.kd-card-inner{padding:64px 72px;min-height:380px;display:flex;flex-direction:column;gap:24px;justify-content:flex-start;}
+.kd-card-1 .kd-card-inner{background:rgba(6,13,42,0.0);}
+.kd-card-2 .kd-card-inner{background:rgba(10,21,80,0.0);}
+.kd-card-3 .kd-card-inner{background:rgba(0,64,255,0.0);}
+.kd-card-4 .kd-card-inner{background:rgba(34,85,238,0.0);}
+.kd-card-title{font-family:'Segoe UI',system-ui,sans-serif;font-size:41px;font-weight:500;letter-spacing:-0.025em;line-height:1.1;color:#fff;}
+.kd-card-text{font-size:20px;line-height:1.55;color:rgba(255,255,255,0.8);max-width:520px;}
+@media(max-width:640px){
+  .kd-card-inner{padding:36px 28px;min-height:260px;}
+  .kd-card-title{font-size:22px;}
+  .kd-card[data-index="0"],.kd-card[data-index="1"],.kd-card[data-index="2"],.kd-card[data-index="3"]{top:70px;}
+}
+
+/* ═══ HOW IT WORKS ═══ */
+.hiw-stage{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  min-height:520px;margin-top:48px;
+  border-top:1px solid rgba(255,255,255,0.06);
+  position:relative;z-index:1;
+}
+.hiw-col{
+  position:relative;display:flex;flex-direction:column;
+  border-right:1px solid rgba(255,255,255,0.08);
+  overflow:hidden;cursor:default;transition:background 0.4s;
+}
+.hiw-col:last-child{border-right:none;}
+.hiw-col.active{background:rgba(255,255,255,0.05);}
+.hiw-col.completed{background:rgba(0,100,255,0.04);}
+.hiw-top{padding:28px 36px 20px;min-height:72px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.hiw-active-tag{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);background:rgba(255,255,255,0.1);padding:4px 10px;border-radius:20px;opacity:0;transition:opacity 0.4s;}
+.hiw-col.active .hiw-active-tag{opacity:1;}
+.hiw-line{position:relative;height:1px;background:rgba(255,255,255,0.12);display:flex;align-items:center;overflow:visible;}
+.hiw-line::after{content:'';position:absolute;left:0;top:0;height:100%;width:0;background:linear-gradient(90deg,#c77dff,#FF6D18);box-shadow:0 0 10px rgba(199,125,255,0.7),0 0 20px rgba(255,109,24,0.4);transition:width 0.55s cubic-bezier(0.4,0,0.2,1);}
+.hiw-col.completed .hiw-line::after{width:100%;}
+.hiw-col.active .hiw-line::after{width:55px;}
+.hiw-dot{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,0.08);border:1.5px solid rgba(199,125,255,0.4);position:absolute;left:36px;top:50%;transform:translateY(-50%);transition:all 0.4s;z-index:2;}
+.hiw-col.active .hiw-dot{background:linear-gradient(135deg,#c77dff,#FF6D18);border-color:transparent;box-shadow:0 0 0 5px rgba(199,125,255,0.15),0 0 18px rgba(199,125,255,0.5),0 0 36px rgba(255,109,24,0.3);}
+.hiw-col.completed .hiw-dot{background:#c77dff;border-color:#8400FF;box-shadow:0 0 0 4px rgba(199,125,255,0.2),0 0 14px rgba(132,0,255,0.5);}
+.hiw-bottom{padding:40px 36px 64px;display:flex;flex-direction:column;gap:16px;position:relative;z-index:2;}
+.hiw-quarter{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#FF9A5C;-webkit-text-fill-color:#FF9A5C;}
+.hiw-title{font-size:26px;font-weight:600;color:rgba(255,255,255,0.95);line-height:1.2;letter-spacing:-0.02em;transition:color 0.3s;}
+.hiw-col.active .hiw-title{color:#fff;}
+.hiw-desc{font-size:16px;color:rgba(255,255,255,0.65);line-height:1.75;transition:color 0.4s;}
+.hiw-col.active .hiw-desc{color:rgba(255,255,255,0.92);}
+.hiw-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 0.5s;z-index:0;}
+.hiw-col.active .hiw-glow{opacity:1;}
+.hiw-glow-1{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(132,0,255,0.2) 0%,transparent 70%);}
+.hiw-glow-2{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(178,91,255,0.18) 0%,transparent 70%);}
+.hiw-glow-3{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(255,109,24,0.2) 0%,transparent 70%);}
+
+/* ═══ TESTIMONIALS ═══ */
+.t-avatar{transition:transform 0.3s;display:flex;flex-direction:column;align-items:center;gap:8px;}
+.t-avatar:hover{transform:scale(1.08);}
+.t-avatar.active .t-av-ring{box-shadow:0 0 0 3px #0040FF,0 0 20px rgba(0,64,255,0.3)!important;}
+.t-av-ring{width:64px;height:64px;border-radius:50%;border:2px solid rgba(0,64,255,0.2);padding:3px;background:#fafaf7;transition:box-shadow 0.3s;}
+.t-av-inner{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;overflow:hidden;}
+.t-av-label{font-size:12px;font-weight:600;color:#030d2a;text-align:center;line-height:1.4;background:rgba(255,255,255,0.9);border:1px solid rgba(0,64,255,0.12);border-radius:8px;padding:4px 10px;white-space:nowrap;}
+.t-av-label span{font-weight:400;color:#6b7280;font-size:11px;}
+
+/* ═══ FAQ ═══ */
+.dark-faq-list{display:flex;flex-direction:column;}
+.dark-faq-item{border-bottom:1px solid rgba(255,255,255,0.08);padding:0;}
+.dark-faq-item:first-child{border-top:1px solid rgba(255,255,255,0.08);}
+.dark-faq-q{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;font-size:17px;font-weight:600;color:rgba(255,255,255,0.7);cursor:pointer;transition:color 0.2s;line-height:1.4;user-select:none;}
+.dark-faq-q:hover{color:#fff;}
+.dark-faq-chevron{flex-shrink:0;color:rgba(255,255,255,0.3);transition:transform 0.3s,color 0.2s;}
+.dark-faq-item.open .dark-faq-chevron{transform:rotate(180deg);color:#FF9A5C;}
+.dark-faq-item.open .dark-faq-q{color:#fff;}
+.dark-faq-a{font-size:16px;color:rgba(255,255,255,0.55);line-height:1.75;max-height:0;overflow:hidden;transition:max-height 0.4s,padding 0.3s;padding:0;}
+.dark-faq-item.open .dark-faq-a{max-height:1600px;padding-bottom:24px;}
+.faq-shell{max-width:1280px;margin:0 auto;padding:80px 32px;position:relative;z-index:1;}
+.faq-grid{display:grid;grid-template-columns:340px minmax(0,1fr);gap:80px;align-items:start;}
+.faq-intro{position:sticky;top:100px;}
+.faq-intro-pill{font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8899ff;display:inline-flex;align-items:center;margin-bottom:16px;padding:5px 14px;background:rgba(0,64,255,0.2);border:1px solid rgba(0,64,255,0.3);border-radius:100px;}
+.faq-intro-title{font-size:clamp(24px,2.5vw,36px);font-weight:500;letter-spacing:-0.025em;line-height:1.15;color:#fff;margin-bottom:20px;}
+
+/* ═══ SECURITY STRIP ═══ */
+.security-strip{
+  background:#fff;padding:80px 0;
+  border-top:1px solid var(--gray-100);border-bottom:1px solid var(--gray-100);
+}
+.security-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+.sec-item{
+  padding:32px;border-right:1px solid var(--gray-100);
+  display:flex;flex-direction:column;gap:12px;
+}
+.sec-item:last-child{border-right:none;}
+.sec-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(0,64,255,0.08);color:var(--purple-600);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sec-title{font-size:15px;font-weight:700;color:var(--ink);}
+.sec-text{font-size:13px;color:var(--gray-600);line-height:1.6;}
+
+/* ═══ FINAL CTA ═══ */
+#final-dot-stage{position:relative;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;cursor:crosshair;background:#fafaf7;overflow:hidden;}
+
+/* ═══ FOOTER ═══ */
+footer.site-footer{padding:60px 0 40px;background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;}
+.footer-wordmark{font-size:18px;font-weight:700;color:#fff;letter-spacing:-0.02em;display:flex;align-items:center;gap:6px;}
+.footer-wordmark span{width:6px;height:6px;border-radius:50%;background:var(--purple-600);box-shadow:0 0 8px var(--purple-600);display:inline-block;}
+.footer-links{display:flex;gap:24px;flex-wrap:wrap;}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:rgba(255,255,255,0.8);}
+.footer-copy{font-size:12px;color:rgba(255,255,255,0.25);}
+
+/* Performance */
+.product-card,.kd-card,.t-avatar{will-change:transform;}
+canvas{pointer-events:none!important;}
+img,video,canvas,iframe,svg{max-width:100%;}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:968px){
+  .nav-links{display:none;}
+  section{padding:80px 0;}
+  .container{padding:0 20px;}
+  .trust-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-top:28px;}
+  .trust-item{border-right:none;padding:0 12px;}
+  .products-grid{grid-template-columns:1fr;}
+  .product-card.full-width{flex-direction:column;min-height:auto;}
+  .full-width-cta{padding-left:0;padding-top:20px;}
+  .security-grid{grid-template-columns:1fr 1fr;}
+  .sec-item:nth-child(even){border-right:none;}
+  .sec-item{border-bottom:1px solid var(--gray-100);}
+  .hiw-stage{grid-template-columns:1fr;}
+  .hiw-col{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);}
+  .faq-grid{grid-template-columns:1fr;gap:28px;}
+  .faq-intro{position:static;}
+}
+@media(max-width:580px){
+  .container{padding:0 16px;}
+  .hero{padding:156px 0 60px;}
+  .trust-strip{grid-template-columns:1fr;}
+  .security-grid{grid-template-columns:1fr;}
+  .sec-item{border-right:none;}
+  .faq-shell{padding:52px 16px;}
+  .kd-card-title{font-size:22px;}
+  .kd-card[data-index="0"],.kd-card[data-index="1"],.kd-card[data-index="2"],.kd-card[data-index="3"]{top:70px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo-wrap" aria-label="Katek home">
+      <div class="logo-wordmark">
+        Katek <span>Platform</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#platform">Platform</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="/login" class="nav-cta">
+      Access Platform
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" style="background:none;">
+  <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;">
+    <source src="https://res.cloudinary.com/dcuswyfur/video/upload/v1777809855/hero_txdvky.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);z-index:1;pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:2;">
+    <div class="hero-grid">
+      <div>
+        <h1 class="page-title" id="heroTitle" style="color:#fff;text-shadow:0 0 40px rgba(255,255,255,0.2);">
+          Operational systems for businesses that need AI, workflows, and <em style="color:#fff;">execution working together.</em>
+        </h1>
+        <p class="hero-sub" id="heroSub" style="min-height:4.5em;"></p>
+        <div class="hero-cta-row">
+          <a href="/login" class="btn-primary">
+            Access Platform
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#platform" class="btn-ghost">
+            Explore Products
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+          </a>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">
+            <div class="trust-label">Authentication</div>
+            <div class="trust-val">Secure &amp; Encrypted</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-label">Access Control</div>
+            <div class="trust-val">Role-Based Permissions</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-label">Infrastructure</div>
+            <div class="trust-val">Business-Grade Systems</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-label">Data</div>
+            <div class="trust-val">Protected &amp; Compliant</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE PROBLEM — BENTO ═══ -->
+<section class="tinted-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">The Problem</span>
+      <h2 class="section-title">Too many tools. <em style="color:inherit;">Not enough coordination.</em></h2>
+      <p class="section-sub">Most organizations run on disconnected software — a CRM here, a chat tool there, an automation app somewhere else. The gaps between them are where work disappears, visibility breaks down, and operational efficiency stalls.</p>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card bento-tall" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1776894866/AI_SOLUTIONS_BG_vg7w7v.png') center/cover no-repeat;border:none;min-height:0;justify-content:flex-end;position:relative;overflow:hidden;">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.25) 60%,transparent 100%);z-index:0;"></div>
+        <div class="bento-body" style="position:relative;z-index:1;padding:28px;">
+          <h3 class="bento-title" style="color:#fff;">Workflows trapped in inboxes</h3>
+          <p class="bento-text" style="color:rgba(255,255,255,0.72);">When operational processes live inside individual email threads, coordination breaks the moment someone is unavailable.</p>
+        </div>
+      </div>
+
+      <div class="bento-col">
+        <div class="bento-card bento-wide" style="background:#fff;border:1px solid var(--gray-100);padding:0;overflow:hidden;">
+          <div style="display:flex;align-items:stretch;height:100%;">
+            <div class="bento-body" style="flex:1;padding:32px;display:flex;flex-direction:column;justify-content:flex-end;">
+              <h3 class="bento-title" style="color:#030d2a;">No visibility across teams</h3>
+              <p class="bento-text" style="color:rgba(3,13,42,0.65);margin-top:10px;">Without centralized coordination, teams duplicate work, miss handoffs, and operate with outdated information. Status becomes a full-time job.</p>
+            </div>
+            <div style="flex:0 0 45%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#fff;">
+              <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1777290720/ChatGPT_Image_24_Nis_2026_13_15_23_1_rfpgcm.png" alt="" style="width:100%;height:100%;object-fit:contain;display:block;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="bento-row">
+          <div class="bento-card" style="justify-content:flex-end;background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1777815310/Frame_1707483487_zradot.png') center/cover no-repeat;position:relative;color:#fff;">
+            <div style="position:absolute;inset:0;background:rgba(3,13,42,0.50);border-radius:inherit;pointer-events:none;"></div>
+            <div style="position:relative;z-index:2;">
+              <h3 class="bento-title" style="color:#fff;">Systems that don't talk to each other</h3>
+              <p class="bento-text" style="color:rgba(255,255,255,0.75);margin-top:8px;">Disconnected software creates manual bridging work. Data doesn't flow — it gets copied, re-entered, and eventually lost.</p>
+            </div>
+          </div>
+          <div class="bento-card" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1776805914/gemini-image-2_make_the_pink_lightning_electric_blue_scheme-1_drnavg.jpg') center/cover no-repeat;border:none;justify-content:flex-end;position:relative;overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.3) 70%,transparent 100%);z-index:0;"></div>
+            <div style="position:relative;z-index:1;">
+              <h3 class="bento-title" style="color:#fff;">Knowledge locked in people, not systems</h3>
+              <p class="bento-text" style="color:rgba(255,255,255,0.65);margin-top:8px;">When operational knowledge exists only in people's heads, onboarding slows, errors multiply, and scaling becomes unpredictable.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHAT IT IS ═══ -->
+<section class="shift">
+  <div class="shift-bg"></div>
+  <div class="container">
+    <div class="shift-inner">
+      <span class="eyebrow">The Platform</span>
+      <h2 class="section-title" style="color:#030d2a;">One ecosystem. <em style="color:inherit;">Multiple operational systems.</em></h2>
+      <p class="shift-body">Katek is a unified software platform that combines AI-assisted workflows, operational coordination, training infrastructure, and knowledge management into a single connected environment. Organizations access structured systems designed to support execution across sales, operations, communication, and learning — without stitching together separate tools.</p>
+      <div style="margin-top:40px;">
+        <img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1777399637/Group_1171275769_bv9w0l.png" alt="Katek Platform Overview" style="width:100%;height:auto;display:block;object-fit:contain;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PLATFORM PRODUCTS ═══ -->
+<section id="platform" style="background:#04091a;position:relative;overflow:hidden;padding:120px 0;">
+  <canvas id="prodStarCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+  <div style="position:absolute;top:-200px;left:-200px;width:900px;height:900px;background:radial-gradient(ellipse,rgba(0,64,255,0.45) 0%,rgba(0,40,200,0.18) 40%,transparent 70%);pointer-events:none;z-index:1;filter:blur(80px);"></div>
+  <div style="position:absolute;bottom:-200px;right:-200px;width:900px;height:900px;background:radial-gradient(ellipse,rgba(132,0,255,0.4) 0%,rgba(80,0,200,0.15) 40%,transparent 70%);pointer-events:none;z-index:1;filter:blur(80px);"></div>
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:500px;background:radial-gradient(ellipse,rgba(0,64,255,0.12) 0%,transparent 70%);pointer-events:none;z-index:1;filter:blur(90px);"></div>
+  <div style="position:absolute;top:-100px;right:10%;width:500px;height:500px;background:radial-gradient(ellipse,rgba(199,125,255,0.22) 0%,transparent 65%);pointer-events:none;z-index:1;filter:blur(70px);"></div>
+  <div style="position:absolute;bottom:-100px;left:10%;width:400px;height:400px;background:radial-gradient(ellipse,rgba(255,109,24,0.18) 0%,transparent 65%);pointer-events:none;z-index:1;filter:blur(70px);"></div>
+
+  <div style="position:relative;z-index:2;">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow" style="color:#8899ff;background:rgba(0,64,255,0.2);border:1px solid rgba(0,64,255,0.3);">Platform Products</span>
+        <h2 class="section-title" style="max-width:none;color:#fff;">Full stack. One operating environment.</h2>
+        <p class="section-sub" style="color:rgba(255,255,255,0.5);">Six interconnected systems, each serving a distinct operational function — all accessible from a unified platform workspace.</p>
+      </div>
+
+      <div class="products-grid">
+
+        <!-- AI KONIK -->
+        <a href="/login" class="product-card p1">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <span class="pill-tag tag-1">AI KONIK</span>
+          <h3 class="product-title">AI workspace and intelligence environment.</h3>
+          <p class="product-pitch">A structured environment for human-AI collaboration, operational AI assistance, and intelligent task support — built for teams that need AI embedded in their workflows, not bolted on.</p>
+          <div class="product-meta">
+            <div class="meta-row"><span class="meta-label">Layer</span><span>Intelligence — the AI engine of the Katek platform</span></div>
+            <div class="meta-row"><span class="meta-label">Features</span><span>Structured prompting, AI task routing, operational context</span></div>
+            <div class="meta-row"><span class="meta-label">Built for</span><span>Teams integrating AI into day-to-day operations</span></div>
+          </div>
+          <span class="product-cta">
+            Access AI KONIK
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- Orchestra -->
+        <a href="/login" class="product-card p2">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <span class="pill-tag tag-2">Orchestra</span>
+          <h3 class="product-title">Operational coordination infrastructure.</h3>
+          <p class="product-pitch">Workflow routing, approval chains, process sequencing, and intelligent handoffs — managed in one place. Orchestra is the coordination layer that keeps multi-step operations moving without manual intervention.</p>
+          <div class="product-meta">
+            <div class="meta-row"><span class="meta-label">Layer</span><span>Coordination — workflow orchestration across teams and systems</span></div>
+            <div class="meta-row"><span class="meta-label">Features</span><span>Approvals, routing logic, escalations, SLA tracking</span></div>
+            <div class="meta-row"><span class="meta-label">Built for</span><span>Operations, professional services, logistics</span></div>
+          </div>
+          <span class="product-cta">
+            Access Orchestra
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- AI Business OS -->
+        <a href="/login" class="product-card p3">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <span class="pill-tag tag-3">AI Business OS</span>
+          <h3 class="product-title">Operational execution platform for service businesses.</h3>
+          <p class="product-pitch">Communication, lead management, follow-up workflows, and business automation in one unified system. Designed for service-based organizations that need consistent execution across every client interaction.</p>
+          <div class="product-meta">
+            <div class="meta-row"><span class="meta-label">Layer</span><span>Application — business-facing execution environment</span></div>
+            <div class="meta-row"><span class="meta-label">Features</span><span>Email, lead flows, content, CRM sync, follow-up automation</span></div>
+            <div class="meta-row"><span class="meta-label">Built for</span><span>Agencies, consultants, realtors, service professionals</span></div>
+          </div>
+          <span class="product-cta">
+            Access AI Business OS
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- SOP Master -->
+        <a href="/login" class="product-card p4">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <span class="pill-tag tag-4">SOP Master</span>
+          <h3 class="product-title">Internal training and SOP management platform.</h3>
+          <p class="product-pitch">Structured onboarding, certification tracking, compliance documentation, and searchable operational knowledge — organized and accessible across your entire team at any time.</p>
+          <div class="product-meta">
+            <div class="meta-row"><span class="meta-label">Layer</span><span>Application — knowledge and compliance infrastructure</span></div>
+            <div class="meta-row"><span class="meta-label">Features</span><span>SOP libraries, certifications, onboarding flows, search</span></div>
+            <div class="meta-row"><span class="meta-label">Built for</span><span>Operations teams, HR, compliance-driven organizations</span></div>
+          </div>
+          <span class="product-cta">
+            Access SOP Master
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- CourseForge -->
+        <a href="/login" class="product-card p5">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <span class="pill-tag tag-5">CourseForge</span>
+          <h3 class="product-title">Course and knowledge monetization platform.</h3>
+          <p class="product-pitch">Structured learning programs, course delivery, and knowledge packaging for experts, educators, and organizations that need to scale their expertise through structured content.</p>
+          <div class="product-meta">
+            <div class="meta-row"><span class="meta-label">Layer</span><span>Application — education and knowledge products</span></div>
+            <div class="meta-row"><span class="meta-label">Features</span><span>Course builder, learner tracking, content delivery, payments</span></div>
+            <div class="meta-row"><span class="meta-label">Built for</span><span>Educators, training teams, knowledge businesses</span></div>
+          </div>
+          <span class="product-cta">
+            Access CourseForge
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <!-- Enterprise Solutions — full width -->
+        <a href="/contact" class="product-card p6 full-width">
+          <div class="card-glow card-glow-1"></div><div class="card-glow card-glow-2"></div>
+          <div class="card-overlay"></div>
+          <div class="full-width-left">
+            <span class="pill-tag tag-6">Enterprise Solutions</span>
+            <h3 class="product-title">Custom integrations and enterprise-grade operational infrastructure.</h3>
+            <p class="product-pitch">For organizations with complex environments, existing systems, and specific integration requirements. Enterprise Solutions provides custom workflow engineering, API integrations, and tailored operational infrastructure built on the Katek platform.</p>
+            <div class="product-meta">
+              <div class="meta-row"><span class="meta-label">Scope</span><span>Custom integrations, API connections, workflow engineering</span></div>
+              <div class="meta-row"><span class="meta-label">Built for</span><span>Enterprise, high-growth, complex multi-system environments</span></div>
+            </div>
+          </div>
+          <div class="full-width-cta">
+            <span class="product-cta">
+              Contact for Enterprise
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+            </span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW THE ECOSYSTEM WORKS — STICKY CARDS ═══ -->
+<section id="how-it-works" class="katek-diff-section">
+  <div class="kd-header-wrap">
+    <span class="eyebrow">How It Works</span>
+    <h2 class="section-title" style="max-width:900px;margin:12px auto 0;color:#030d2a;">Built as connected operational layers.</h2>
+    <p class="section-sub" style="margin-top:16px;max-width:650px;margin-left:auto;margin-right:auto;">The Katek ecosystem is structured across three distinct operational layers — each handling a different function, all working together to give organizations greater consistency, visibility, and coordination.</p>
+  </div>
+
+  <div class="kd-cards-wrap">
+    <div class="kd-card kd-card-1" data-index="0" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1776978679/1c_ve77ga.png') center/cover no-repeat;">
+      <div class="kd-card-inner">
+        <h3 class="kd-card-title">Layer 01 — Intelligence</h3>
+        <p class="kd-card-text">AI systems and operational intelligence accessed through AI KONIK. This layer handles structured human-AI collaboration, intelligent task assistance, and the decision-support infrastructure that powers execution across the platform.</p>
+      </div>
+    </div>
+
+    <div class="kd-card kd-card-2" data-index="1" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1777815639/2c_evpvro.png') center/cover no-repeat;">
+      <div class="kd-card-inner">
+        <h3 class="kd-card-title">Layer 02 — Coordination</h3>
+        <p class="kd-card-text">Workflow orchestration and operational routing managed through Orchestra. Approvals, sequencing, conditional logic, escalations, and process management — all handled systematically so work moves forward without manual intervention at every step.</p>
+      </div>
+    </div>
+
+    <div class="kd-card kd-card-3" data-index="2" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1777815789/4c_pgkbvu.png') center/cover no-repeat;">
+      <div class="kd-card-inner">
+        <h3 class="kd-card-title">Layer 03 — Application</h3>
+        <p class="kd-card-text">Business-facing systems including AI Business OS, SOP Master, and CourseForge. These are the tools your teams use every day — built on the intelligence and coordination infrastructure below, so they work together rather than in isolation.</p>
+      </div>
+    </div>
+
+    <div class="kd-card kd-card-4" data-index="3" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1777815554/3c_bfcaoi.png') center/cover no-repeat;">
+      <div class="kd-card-inner">
+        <h3 class="kd-card-title">One login. One workspace. All systems connected.</h3>
+        <p class="kd-card-text">Katek provides centralized platform access through a unified authentication environment. Users access the specific systems relevant to their role, team, and operational responsibilities — without managing separate tools or credentials.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW WE WORK — 3 STEPS ═══ -->
+<section class="dark-section" id="how" style="padding:0;overflow:hidden;position:relative;background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1776807863/Frame_1707483471_jfbza4.png') center/cover no-repeat;">
+  <div style="padding:80px 40px 0;max-width:1280px;margin:0 auto;position:relative;z-index:1;">
+    <span class="eyebrow" style="background:rgba(0,64,255,0.2);color:#8899ff;-webkit-text-fill-color:#8899ff;border-color:rgba(0,64,255,0.3);">Platform Access</span>
+    <h2 class="section-title" style="color:#fff;max-width:600px;margin-top:12px;">Getting started is straightforward.</h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.45);max-width:500px;">Access your workspace in three steps — no complex setup, no technical requirements.</p>
+  </div>
+
+  <div class="hiw-stage" id="hiwStage">
+    <div class="hiw-col" data-index="0">
+      <div class="hiw-top">
+        <div></div>
+        <div class="hiw-active-tag">Start here</div>
+      </div>
+      <div class="hiw-line"><div class="hiw-dot"></div></div>
+      <div class="hiw-bottom">
+        <div class="hiw-quarter">01 / AUTHENTICATE</div>
+        <div class="hiw-title">Securely access your workspace.</div>
+        <div class="hiw-desc">Log in with your organization credentials via secure authentication. Role-based access controls ensure each user sees only the systems relevant to their responsibilities.</div>
+      </div>
+      <div class="hiw-glow hiw-glow-1"></div>
+    </div>
+
+    <div class="hiw-col" data-index="1">
+      <div class="hiw-top"></div>
+      <div class="hiw-line"><div class="hiw-dot"></div></div>
+      <div class="hiw-bottom">
+        <div class="hiw-quarter">02 / CONNECT</div>
+        <div class="hiw-title">Configure your systems and integrations.</div>
+        <div class="hiw-desc">Connect your existing tools — CRM, email, calendar, project management — to the Katek platform. Integrations are managed centrally, so data flows across systems without manual bridging.</div>
+      </div>
+      <div class="hiw-glow hiw-glow-2"></div>
+    </div>
+
+    <div class="hiw-col" data-index="2">
+      <div class="hiw-top"></div>
+      <div class="hiw-line"><div class="hiw-dot"></div></div>
+      <div class="hiw-bottom">
+        <div class="hiw-quarter">03 / OPERATE</div>
+        <div class="hiw-title">Run your operations from one environment.</div>
+        <div class="hiw-desc">Access AI tools, workflow systems, training environments, and coordination infrastructure through a single platform workspace. Everything your team needs, centralized and connected.</div>
+      </div>
+      <div class="hiw-glow hiw-glow-3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SECURITY ═══ -->
+<div class="security-strip" id="security">
+  <div class="container">
+    <div class="section-header" style="margin-bottom:40px;">
+      <span class="eyebrow">Security</span>
+      <h2 class="section-title">Built with operational reliability and platform security in mind.</h2>
+      <p class="section-sub">Every layer of the Katek platform is designed with the authentication, data protection, and access control requirements that business-critical systems demand.</p>
+    </div>
+    <div class="security-grid">
+      <div class="sec-item">
+        <div class="sec-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="sec-title">Secure Authentication</div>
+        <p class="sec-text">Centralized authentication infrastructure with encrypted sessions, OAuth 2.0 support, and role-based access controls for all platform users.</p>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="sec-title">Data Protection</div>
+        <p class="sec-text">Operational data is managed using secure infrastructure with encryption in transit and at rest. Communication protocols follow industry-standard security practices.</p>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </div>
+        <div class="sec-title">Controlled Access</div>
+        <p class="sec-text">Organizations manage user permissions, system access, and operational visibility from a centralized administration environment. Granular controls for teams of any size.</p>
+      </div>
+      <div class="sec-item">
+        <div class="sec-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div class="sec-title">Platform Infrastructure</div>
+        <p class="sec-text">Built for scalable operational environments, third-party integrations, and connected workflows. Uptime and reliability designed for business-critical systems.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="results" style="background:#fff;overflow:hidden;position:relative;">
+  <div class="results-stage" style="position:relative;height:620px;">
+    <div class="t-avatar" data-idx="0" style="position:absolute;left:18%;top:8%;cursor:pointer;z-index:3;">
+      <div class="t-av-ring"><div class="t-av-inner" style="background:none;overflow:hidden;"><img src="https://randomuser.me/api/portraits/women/44.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" /></div></div>
+      <div class="t-av-label">Sarah M.<br><span>Ops Manager · Dallas</span></div>
+    </div>
+    <div class="t-avatar" data-idx="3" style="position:absolute;left:18%;bottom:8%;cursor:pointer;z-index:3;">
+      <div class="t-av-ring"><div class="t-av-inner" style="background:none;overflow:hidden;"><img src="https://randomuser.me/api/portraits/men/75.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" /></div></div>
+      <div class="t-av-label">Marcus T.<br><span>Director · Austin</span></div>
+    </div>
+    <div class="t-avatar" data-idx="1" style="position:absolute;right:18%;top:8%;cursor:pointer;z-index:3;">
+      <div class="t-av-ring"><div class="t-av-inner" style="background:none;overflow:hidden;"><img src="https://res.cloudinary.com/dcuswyfur/image/upload/v1777400017/Group_1171275742_epqisc.png" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" /></div></div>
+      <div class="t-av-label">Amanda K.<br><span>Team Lead · Chicago</span></div>
+    </div>
+    <div class="t-avatar" data-idx="2" style="position:absolute;left:50%;bottom:8%;transform:translateX(-50%);cursor:pointer;z-index:3;">
+      <div class="t-av-ring"><div class="t-av-inner" style="background:none;overflow:hidden;"><img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" /></div></div>
+      <div class="t-av-label">David R.<br><span>COO · New York</span></div>
+    </div>
+    <div class="t-avatar" data-idx="4" style="position:absolute;right:18%;bottom:8%;cursor:pointer;z-index:3;">
+      <div class="t-av-ring"><div class="t-av-inner" style="background:none;overflow:hidden;"><img src="https://randomuser.me/api/portraits/women/90.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;" /></div></div>
+      <div class="t-av-label">Lisa O.<br><span>Partner · Boston</span></div>
+    </div>
+
+    <div class="results-copy" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 28%;pointer-events:none;z-index:2;gap:8px;text-align:center;">
+      <span class="eyebrow">User Feedback</span>
+      <h2 class="section-title" style="margin-bottom:4px;">Teams that moved from <em style="color:inherit;">fragmented tools to a single platform.</em></h2>
+      <div class="results-copy-body" style="min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-top:4px;">
+        <p id="testiQ" class="testi-quote" style="font-size:clamp(17px,2vw,24px);font-weight:400;line-height:1.6;color:#374151;letter-spacing:-0.02em;transition:opacity 0.4s;opacity:0;"></p>
+        <div id="testiMeta" style="opacity:0;transition:opacity 0.4s 0.1s;display:flex;align-items:center;gap:6px;">
+          <span id="testiN" style="font-size:15px;font-weight:600;color:#030d2a;"></span>
+          <span style="color:#d1d5db;">·</span>
+          <span id="testiR" style="font-size:15px;color:#6b7280;"></span>
+        </div>
+        <p id="testiHint" style="font-size:11px;color:#9ca3af;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px;">Click a profile to read</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section id="faq" style="background:url('https://res.cloudinary.com/dcuswyfur/image/upload/v1777816065/education_tbz027.png') center/cover no-repeat;padding:0;position:relative;">
+  <div class="faq-shell">
+    <div class="faq-grid">
+      <div class="faq-intro">
+        <span class="faq-intro-pill">FAQ</span>
+        <h2 class="faq-intro-title">Common questions about the platform.</h2>
+      </div>
+
+      <div class="dark-faq-list">
+        <div class="dark-faq-item open">
+          <div class="dark-faq-q">What is Katek and what does the platform do?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">Katek is an operational software platform that provides organizations with a unified environment for AI-assisted workflows, business coordination, internal training, and knowledge management. Instead of managing separate tools for each function, teams access structured systems through a single authenticated workspace.</div>
+        </div>
+
+        <div class="dark-faq-item">
+          <div class="dark-faq-q">What is the relationship between Katek and Katek AI?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">Katek AI is the parent company — an AI engineering and systems firm that designs and builds operational AI infrastructure. Katek (katek.app) is the software platform ecosystem — the operational tools, workflow systems, and business applications that organizations access as a managed platform. Katek AI builds the systems; Katek is where teams use them.</div>
+        </div>
+
+        <div class="dark-faq-item">
+          <div class="dark-faq-q">How does authentication and user access work?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">Katek uses centralized authentication with support for Google OAuth, email login, and enterprise SSO. Role-based access controls allow administrators to manage which systems and data each user can access. Sessions are encrypted and access is logged for security and compliance purposes.</div>
+        </div>
+
+        <div class="dark-faq-item">
+          <div class="dark-faq-q">What data does the platform collect and how is it used?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">Katek collects operational data necessary to provide platform functionality — including authentication credentials, workflow data, user activity logs, and integration-related information. Data is used to deliver platform features, ensure security, and support operational continuity. We do not sell user data to third parties. Full details are in our Privacy Policy.</div>
+        </div>
+
+        <div class="dark-faq-item">
+          <div class="dark-faq-q">What integrations does the platform support?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">The Katek platform integrates with Gmail, Google Calendar, Outlook, major CRM systems including HubSpot and HighLevel, project management tools, communication platforms, and additional business software via API. Integrations are configured at the organization level and managed through the platform's centralized settings.</div>
+        </div>
+
+        <div class="dark-faq-item">
+          <div class="dark-faq-q">How do I request deletion of my account or data?<svg class="dark-faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <div class="dark-faq-a">Users may request deletion of their account and associated operational data by contacting support@katek.app. Deletion requests are processed according to platform policies and applicable data protection requirements. Requests are typically completed within 30 days. A dedicated data deletion page is also available at katek.app/data-deletion.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FINAL CTA ═══ -->
+<div id="final-dot-stage" style="position:relative;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;cursor:crosshair;background:#fafaf7;overflow:hidden;">
+  <canvas id="final-canvas" style="position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none;will-change:transform;"></canvas>
+  <div style="position:relative;z-index:2;text-align:center;padding:0 5vw;pointer-events:none;max-width:860px;">
+    <h2 id="contact" style="font-family:'Segoe UI',system-ui,sans-serif;font-size:clamp(36px,4.5vw,64px);font-weight:500;letter-spacing:-0.03em;line-height:1.1;max-width:860px;margin:0 auto 16px;color:var(--ink);">Access your workspace through a unified platform environment.</h2>
+    <p style="font-size:17px;color:var(--gray-600);margin-bottom:36px;line-height:1.55;">For platform support, operational inquiries, integrations, or access-related questions, contact the Katek team at <strong style="color:var(--ink);">support@katek.app</strong></p>
+    <a href="/login" class="btn-primary" style="pointer-events:auto;background:#030d2a;color:#fff;box-shadow:0 8px 32px rgba(3,13,42,0.15);">
+      Login to Platform
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+    <p style="margin-top:16px;font-size:13px;color:var(--gray-500);letter-spacing:0.04em;">Secure Authentication &nbsp;·&nbsp; Encrypted Infrastructure &nbsp;·&nbsp; Role-Based Access</p>
+  </div>
+</div>
+
+<svg id="katek-shape" width="0" height="0" style="position:absolute;pointer-events:none;" aria-hidden="true">
+  <path id="katek-path" d="M 277.3 539.2 C 254.2 393.8 150.5 289.6 0.0 270.2 C 147.5 253.2 256.9 147.6 277.2 0.0 C 303.8 148.0 403.1 249.7 552.1 270.0 C 408.5 291.5 303.7 389.5 277.4 539.0 Z"/>
+</svg>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-wordmark">
+        <span></span>
+        Katek
+      </div>
+      <nav class="footer-links">
+        <a href="/">Home</a>
+        <a href="/login">Login</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+        <a href="/security">Security</a>
+        <a href="/data-deletion">Data Deletion</a>
+        <a href="mailto:support@katek.app">Contact</a>
+      </nav>
+      <p class="footer-copy">© 2026 Katek — Operational software infrastructure for modern businesses.</p>
+    </div>
+  </div>
+</footer>
+
+<style>@keyframes cursorBlink{50%{opacity:0;}}</style>
+
+<script>
+/* Hero subtitle typewriter */
+(function () {
+  const el = document.getElementById('heroSub');
+  if (!el) return;
+  const text = "A unified platform for operational coordination, AI-assisted workflows, training systems, and business infrastructure — designed to help teams work more efficiently across sales, operations, communication, and knowledge management.";
+  const SPEED = 18;
+  const cursor = document.createElement('span');
+  cursor.style.cssText = 'display:inline-block;width:2px;height:1em;background:#fafaf7;margin-left:2px;vertical-align:text-bottom;animation:cursorBlink 0.55s steps(1) infinite;';
+  el.appendChild(cursor);
+  let i = 0;
+  function tick() {
+    if (i < text.length) {
+      el.insertBefore(document.createTextNode(text[i]), cursor);
+      i++;
+      setTimeout(tick, SPEED + (Math.random() * 8 - 4));
+    }
+  }
+  setTimeout(tick, 400);
+})();
+</script>
+
+<script>
+/* Products starfield */
+(function(){
+  var c = document.getElementById('prodStarCanvas');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var stars = [];
+  var mx = 0, my = 0;
+  function resize(){ c.width = c.offsetWidth; c.height = c.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  for (var i = 0; i < 160; i++) {
+    stars.push({ x: Math.random(), y: Math.random(), r: Math.random()*1.2+0.2, layer: Math.random(), opacity: Math.random()*0.6+0.2 });
+  }
+  document.addEventListener('mousemove', function(e){ mx = (e.clientX/window.innerWidth-0.5)*2; my = (e.clientY/window.innerHeight-0.5)*2; });
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    stars.forEach(function(s){
+      var px = (s.x*c.width+mx*18*s.layer)%c.width;
+      var py = (s.y*c.height+my*18*s.layer)%c.height;
+      ctx.beginPath(); ctx.arc(px,py,s.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,'+s.opacity+')'; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+
+<script>
+/* Sticky cards scale + shadow */
+(function () {
+  const cards = Array.from(document.querySelectorAll('.kd-card'));
+  if (!cards.length) return;
+  function setTops() { cards.forEach((c,i) => { c.style.top = (24+i*16)+'px'; }); }
+  setTops(); window.addEventListener('resize', setTops);
+  function update() {
+    cards.forEach((card,i) => {
+      const rect = card.getBoundingClientRect();
+      const stickyTop = parseFloat(getComputedStyle(card).top)||0;
+      const t = Math.max(0,Math.min(1, 1-(rect.top-stickyTop)/300));
+      const scale = i < cards.length-1 ? Math.max(0.78, 1-t*0.14) : 1;
+      card.style.transform = 'scale('+scale.toFixed(4)+')';
+      card.style.boxShadow = '0 '+Math.round(4+t*12)+'px '+Math.round(20+t*40)+'px 0 rgba(0,0,0,'+(t*0.18).toFixed(3)+')';
+    });
+  }
+  let raf = false;
+  window.addEventListener('scroll', () => { if(!raf){raf=true;requestAnimationFrame(()=>{update();raf=false;});}}, {passive:true});
+  update();
+})();
+</script>
+
+<script>
+/* How it works — column hover */
+(function () {
+  const cols = document.querySelectorAll('.hiw-col');
+  const stage = document.getElementById('hiwStage');
+  if (!cols.length||!stage) return;
+  cols[0].classList.add('active');
+  cols.forEach((col,idx) => {
+    col.addEventListener('mouseenter', () => {
+      cols.forEach((c,i) => { c.classList.remove('active','completed'); if(i<idx) c.classList.add('completed'); });
+      col.classList.add('active');
+    });
+  });
+  stage.addEventListener('mouseleave', () => {
+    cols.forEach(c => c.classList.remove('active','completed'));
+    cols[0].classList.add('active');
+  });
+})();
+</script>
+
+<script>
+/* Testimonials — float + click + rotate */
+(function () {
+  const data = [
+    { q: '"Finally a platform where our workflows actually connect. Our team stopped asking where things stand — the system just tells them."', n: 'Sarah M.', r: 'Ops Manager · Dallas' },
+    { q: '"We consolidated four separate tools into one environment. Onboarding new staff went from two weeks to three days."', n: 'Amanda K.', r: 'Team Lead · Chicago' },
+    { q: '"The centralized access controls alone were worth it. Our team stays in one place, and I can see what\'s happening across the whole operation."', n: 'David R.', r: 'COO · New York' },
+    { q: '"The SOP system changed how we operate. Knowledge that used to live in people\'s heads is now searchable and structured."', n: 'Marcus T.', r: 'Director · Austin' },
+    { q: '"Our client intake, follow-up, and reporting workflows are all in one platform now. The time savings are significant."', n: 'Lisa O.', r: 'Managing Partner · Boston' }
+  ];
+  const qEl = document.getElementById('testiQ');
+  const metaEl = document.getElementById('testiMeta');
+  const nEl = document.getElementById('testiN');
+  const rEl = document.getElementById('testiR');
+  const hint = document.getElementById('testiHint');
+  const avs = document.querySelectorAll('.t-avatar');
+  if (!avs.length) return;
+
+  avs.forEach((av,i) => {
+    const amp=8+i*3, spd=3000+i*700, start=performance.now()+i*400;
+    function float(now){ const t=(now-start)/spd; av.style.transform='translate('+(Math.cos(t*Math.PI*1.3)*amp*0.4).toFixed(1)+'px,'+(Math.sin(t*Math.PI*2)*amp).toFixed(1)+'px)'; requestAnimationFrame(float); }
+    requestAnimationFrame(float);
+  });
+
+  avs.forEach(av => {
+    av.addEventListener('click', () => {
+      const d = data[+av.dataset.idx];
+      avs.forEach(a => a.classList.remove('active')); av.classList.add('active');
+      if(hint) hint.style.display='none';
+      qEl.style.opacity='0'; metaEl.style.opacity='0';
+      setTimeout(() => { qEl.textContent=d.q; nEl.textContent=d.n; rEl.textContent=d.r; qEl.style.opacity='1'; metaEl.style.opacity='1'; }, 250);
+    });
+  });
+
+  let cur=0;
+  setTimeout(() => { avs[0].click(); setInterval(() => { cur=(cur+1)%avs.length; avs[cur].click(); }, 3000); }, 800);
+})();
+</script>
+
+<script>
+/* FAQ accordion */
+(function(){
+  var items = document.querySelectorAll('#faq .dark-faq-item');
+  items.forEach(function(item){
+    item.querySelector('.dark-faq-q').addEventListener('click', function(){
+      var isOpen = item.classList.contains('open');
+      items.forEach(function(i){ i.classList.remove('open'); });
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+})();
+</script>
+
+<script>
+/* Final CTA dot canvas */
+(function () {
+  const stage = document.getElementById('final-dot-stage');
+  const canvas = document.getElementById('final-canvas');
+  if (!stage||!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const GAP=32, RADIUS=1.5, ALPHA=0.75, LG=0.032, LS=0.018;
+  let W=0, H=0, dots=[], mouse={x:-9999,y:-9999}, mode='scatter';
+
+  function buildTargets() {
+    const p=document.getElementById('katek-path'); if(!p) return [];
+    try {
+      const bbox=p.getBBox(); const scale=Math.min(W/bbox.width,H/bbox.height)*0.55;
+      const cx=W/2, cy=H/2, pts=[], step=12;
+      const oc=document.createElement('canvas');
+      oc.width=Math.ceil(bbox.width); oc.height=Math.ceil(bbox.height);
+      const ox=oc.getContext('2d'); ox.translate(-bbox.x,-bbox.y); ox.fillStyle='#000'; ox.fill(new Path2D(p.getAttribute('d')));
+      const img=ox.getImageData(0,0,oc.width,oc.height).data;
+      for(let y=0;y<oc.height;y+=step) for(let x=0;x<oc.width;x+=step)
+        if(img[(y*oc.width+x)*4+3]>100) pts.push({x:cx+(x+bbox.x-(bbox.x+bbox.width/2))*scale, y:cy+(y+bbox.y-(bbox.y+bbox.height/2))*scale});
+      return pts;
+    } catch(e){return [];}
+  }
+
+  function rebuild() {
+    W=stage.offsetWidth||window.innerWidth; H=stage.offsetHeight||window.innerHeight;
+    const dpr=window.devicePixelRatio||1; canvas.width=W*dpr; canvas.height=H*dpr;
+    canvas.style.width=W+'px'; canvas.style.height=H+'px'; ctx.scale(dpr,dpr);
+    const cols=Math.floor(W/GAP)+1, rows=Math.floor(H/GAP)+1;
+    const offX=(W-(cols-1)*GAP)/2, offY=(H-(rows-1)*GAP)/2;
+    dots=[];
+    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++) {
+      const gx=offX+c*GAP, gy=offY+r*GAP;
+      dots.push({x:gx,y:gy,gx,gy,tx:gx,ty:gy});
+    }
+    const t=buildTargets();
+    if(t.length) for(let i=0;i<dots.length;i++){dots[i].tx=t[i%t.length].x;dots[i].ty=t[i%t.length].y;}
+  }
+
+  function tick() {
+    requestAnimationFrame(tick); ctx.clearRect(0,0,W,H);
+    for(const d of dots) {
+      const tx=mode==='gather'?d.tx:d.gx, ty=mode==='gather'?d.ty:d.gy, lr=mode==='gather'?LG:LS;
+      const dx=d.x-mouse.x, dy=d.y-mouse.y, dist2=dx*dx+dy*dy;
+      let rx=0,ry=0;
+      if(dist2<110*110&&dist2>0.01){const dist=Math.sqrt(dist2),f=(1-dist/110)*4;rx=dx/dist*f;ry=dy/dist*f;}
+      d.x+=(tx-d.x)*lr+rx; d.y+=(ty-d.y)*lr+ry;
+      const t=Math.max(0,Math.min(1,d.y/H));
+      let r,g,b;
+      if(t<0.5){const s=t*2;r=Math.round((199-0)*s);g=Math.round(64+(125-64)*s);b=255;}
+      else{const s=(t-0.5)*2;r=Math.round(199+(255-199)*s);g=Math.round(125+(109-125)*s);b=Math.round(255+(24-255)*s);}
+      ctx.globalAlpha=ALPHA; ctx.fillStyle='rgb('+r+','+g+','+b+')';
+      ctx.beginPath(); ctx.arc(d.x,d.y,RADIUS,0,Math.PI*2); ctx.fill();
+    }
+    ctx.globalAlpha=1;
+  }
+
+  stage.addEventListener('mouseenter',()=>{mode='gather';});
+  stage.addEventListener('mouseleave',()=>{mode='scatter';mouse.x=mouse.y=-9999;});
+  stage.addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+  window.addEventListener('resize',()=>{ctx.resetTransform();rebuild();});
+  setTimeout(()=>{rebuild();requestAnimationFrame(tick);},100);
+})();
+</script>
+
+</body>
+</html>
